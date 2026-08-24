@@ -3,133 +3,264 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibe Check</title>
+  <title>Date Invitation</title>
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #fde8ed;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
+      min-height: 100vh;
     }
-
     .card {
-      background: #161b22;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       text-align: center;
-      max-width: 420px;
-      width: 100%;
-      border: 1px solid #30363d;
+      max-width: 400px;
+      width: 90%;
+      transition: all 0.3s ease;
     }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 12px;
-      background: #238636;
-      color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
+    .screen {
+      display: none;
     }
-
-    h2 { color: #f0f6fc; margin-top: 0; font-size: 1.4rem; }
-    p { color: #8b949e; font-size: 0.95rem; line-height: 1.5; }
-
-    button {
+    .screen.active {
       display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      background-color: #21262d;
-      color: #58a6ff;
-      font-size: 0.9rem;
-      font-weight: 600;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    .img-container {
+      margin-bottom: 20px;
+    }
+    .img-container img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      position: relative;
+    }
+    button {
+      background-color: #fca5a5;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background-color 0.2s, transform 0.1s;
     }
-
     button:hover {
-      background-color: #30363d;
-      border-color: #8b949e;
+      background-color: #f87171;
     }
-
-    #feedback { margin-top: 15px; font-weight: 500; min-height: 20px; }
+    #noBtn {
+      position: relative;
+      background-color: #e5e7eb;
+      color: #374151;
+    }
+    #noBtn:hover {
+      background-color: #d1d5db;
+    }
+    .input-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 5px;
+    }
+    input[type="date"], select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .grid-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .grid-item:hover, .grid-item.selected {
+      border-color: #f87171;
+      background-color: #fff1f2;
+    }
+    .grid-item span {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .ps-text {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 15px;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <div id="badge" class="badge">SECURITY CHECK</div>
-    <h2 id="title">Level 1: Quick Vibe Check</h2>
-    <p id="description">Before proceeding, we need to verify if your decision-making skills are top tier.</p>
     
-    <div id="interactive-area">
-      <button onclick="nextLevel(1)">Option A: Good Taste & Great Conversations</button>
-      <button onclick="nextLevel(0)">Option B: Boring Texts & Dry Responses</button>
+    <!-- Screen 1: Initial Question -->
+    <div id="screen1" class="screen active">
+      <div class="img-container">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" alt="Cute Dog">
+      </div>
+      <h2>Will you go on a date with me? 🌸</h2>
+      <div class="btn-group">
+        <button id="yesBtn">YES 💕</button>
+        <button id="noBtn">NO 💔</button>
+      </div>
     </div>
 
-    <p id="feedback"></p>
+    <!-- Screen 2: Reaction -->
+    <div id="screen2" class="screen">
+      <h2>Wait... YOU ACTUALLY SAID YES?? 🥳</h2>
+      <p style="color: #6b7280; margin-bottom: 20px;">I was ready for you to say no 🥹</p>
+      <button onclick="nextScreen(3)">okay okay! 🎉</button>
+    </div>
+
+    <!-- Screen 3: Date & Time Selection -->
+    <div id="screen3" class="screen">
+      <h2>So... when are you free? 📅</h2>
+      <div class="input-group">
+        <label>Pick a Day 🗓️</label>
+        <input type="date" id="dateInput">
+      </div>
+      <div class="input-group">
+        <label>What Time? ⏰</label>
+        <select id="timeInput">
+          <option value="">Select a time...</option>
+          <option value="4:00 PM">4:00 PM</option>
+          <option value="5:00 PM">5:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="7:00 PM">7:00 PM</option>
+          <option value="8:00 PM">8:00 PM</option>
+        </select>
+      </div>
+      <button style="width: 100%; margin-top: 10px;" onclick="saveDateTime()">set the date! 💕</button>
+    </div>
+
+    <!-- Screen 4: Vibe / Food Preference -->
+    <div id="screen4" class="screen">
+      <h2>What are we feeling? 🍽️✨</h2>
+      <p style="font-size: 12px; color: #6b7280;">pick your vibe</p>
+      <div class="grid">
+        <div class="grid-item" onclick="selectVibe(this, 'Pizza')"><span>🍕</span>Pizza</div>
+        <div class="grid-item" onclick="selectVibe(this, 'Sushi')"><span>🍣</span>Sushi</div>
+        <div class="grid-item" onclick="selectVibe(this, 'Burgers')"><span>🍔</span>Burgers</div>
+        <div class="grid-item" onclick="selectVibe(this, 'Pasta')"><span>🍝</span>Pasta</div>
+        <div class="grid-item" onclick="selectVibe(this, 'Tacos')"><span>🌮</span>Tacos</div>
+        <div class="grid-item" onclick="selectVibe(this, 'Ramen')"><span>🍜</span>Ramen</div>
+      </div>
+      <button style="width: 100%; margin-top: 20px;" onclick="nextScreen(5)">let's go! 🚀</button>
+    </div>
+
+    <!-- Screen 5: Final Confirmation -->
+    <div id="screen5" class="screen">
+      <h2>Glad you didn't say no. Be ready! 🍒</h2>
+      <p id="summaryText" style="color: #4b5563; margin: 15px 0; font-weight: 500;"></p>
+      <button style="width: 100%;" onclick="alert('It\'s a date! ❤️')">ok I accept! 🥰</button>
+      <p class="ps-text">P.S. I made a website for you, no big deal 💕</p>
+    </div>
+
   </div>
 
   <script>
-    let currentLevel = 1;
+    let selectedDate = '';
+    let selectedTime = '';
+    let selectedVibeText = 'Food';
 
-    function nextLevel(choice) {
-      const title = document.getElementById("title");
-      const description = document.getElementById("description");
-      const area = document.getElementById("interactive-area");
-      const feedback = document.getElementById("feedback");
-
-      if (currentLevel === 1) {
-        if (choice === 1) {
-          currentLevel = 2;
-          title.innerText = "Level 2: Priorities Check";
-          description.innerText = "What is the official protocol for a lazy weekend?";
-          area.innerHTML = `
-            <button onclick="nextLevel(1)">Option A: Good food, coffee, & zero alarms</button>
-            <button onclick="nextLevel(0)">Option B: Waking up at 6 AM to do chores</button>
-          `;
-          feedback.style.color = "#3fb950";
-          feedback.innerText = "Correct. Passed Level 1!";
-        } else {
-          feedback.style.color = "#f85149";
-          feedback.innerText = "Incorrect choice. Try again!";
-        }
-      } 
-      else if (currentLevel === 2) {
-        if (choice === 1) {
-          currentLevel = 3;
-          document.getElementById("badge").innerText = "ACCESS GRANTED";
-          document.getElementById("badge").style.background = "#8957e5";
-          
-          title.innerText = "Verification Complete 🏆";
-          description.innerText = "Congratulations! You passed all security levels.";
-          area.innerHTML = `
-            <div style="background: #0d1117; padding: 15px; border-radius: 8px; border: 1px solid #30363d; text-align: left;">
-              <strong style="color: #f0f6fc;">Unlocked Voucher:</strong><br>
-              <span style="color: #8b949e; font-size: 0.9rem;">1x Coffee / Dessert Date on me.</span><br><br>
-              <em style="color: #58a6ff; font-size: 0.85rem;">*Claimable whenever you decide to stop playing hard to get.*</em>
-            </div>
-          `;
-          feedback.style.color = "#3fb950";
-          feedback.innerText = "100% Vibe Match.";
-        } else {
-          feedback.style.color = "#f85149";
-          feedback.innerText = "Wrong protocol. Who wakes up early on weekends?";
-        }
-      }
+    // Screen navigation
+    function nextScreen(screenNum) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + screenNum).classList.add('active');
     }
+
+    // "Yes" button trigger with Confetti
+    document.getElementById('yesBtn').addEventListener('click', () => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      nextScreen(2);
+    });
+
+    // "No" button dodge effect
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * 140 - 70;
+      const y = Math.random() * 140 - 70;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Save Date and Time
+    function saveDateTime() {
+      const dateVal = document.getElementById('dateInput').value;
+      const timeVal = document.getElementById('timeInput').value;
+      
+      if (!dateVal || !timeVal) {
+        alert('Please pick both date and time! 😊');
+        return;
+      }
+      
+      selectedDate = dateVal;
+      selectedTime = timeVal;
+      nextScreen(4);
+    }
+
+    // Vibe selection
+    function selectVibe(element, vibe) {
+      document.querySelectorAll('.grid-item').forEach(item => item.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedVibeText = vibe;
+    }
+
+    // Update final summary
+    function updateSummary() {
+      document.getElementById('summaryText').innerText = 
+        `See you on ${selectedDate} at ${selectedTime} for ${selectedVibeText}!`;
+    }
+
+    // Trigger update before screen 5 displays
+    const observer = new MutationObserver(() => {
+      if (document.getElementById('screen5').classList.contains('active')) {
+        updateSummary();
+      }
+    });
+    observer.observe(document.getElementById('screen5'), { attributes: true, attributeFilter: ['class'] });
   </script>
+
 </body>
 </html>
