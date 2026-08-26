@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Selection Dashboard - Professional Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #1e40af;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #ea580c;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .navbar-status {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .filter-input, .filter-select {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .filter-btn:hover {
+            background: #1e3a8a;
+        }
+        
+        .filter-btn.secondary {
+            background: var(--bg-light);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .filter-btn.secondary:hover {
+            background: #f1f5f9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-change {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .criteria-item {
+            text-align: center;
+        }
+        
+        .criteria-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .criteria-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .stocks-container {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .stock-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .stock-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+        }
+        
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stock-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stock-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .stock-price {
+            text-align: right;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .price-up {
+            color: var(--success);
+        }
+        
+        .price-down {
+            color: var(--danger);
+        }
+        
+        .score {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-buy {
+            background: #dcfce7;
+            color: var(--success);
+        }
+        
+        .badge-sell {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .badge-hold {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+        
+        .criteria-checks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 6px 10px;
+            background: var(--bg-light);
+            border-radius: 4px;
+        }
+        
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .check-pass {
+            background: var(--success);
+            color: white;
+        }
+        
+        .check-fail {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .technical-info {
+            background: var(--bg-light);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .technical-info h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            font-size: 12px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 3rem;
+        }
+        
+        .error {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .success {
+            background: #dcfce7;
+            border: 1px solid #86efac;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stock-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stock-price {
+                text-align: left;
+                margin-top: 0.5rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .filter-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">📊 Stock Selection Pro</div>
+            <div class="navbar-status">
+                <span id="update-status">Loading...</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Fundamental & Technical Stock Analysis</h1>
+            <p>Real-time screening with Supertrend signals and performance metrics</p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <input type="text" id="search-stock" class="filter-input" placeholder="Search symbol...">
+                <select id="signal-filter" class="filter-select">
+                    <option value="">All Signals</option>
+                    <option value="BUY">Buy Only</option>
+                    <option value="SELL">Sell Only</option>
+                </select>
+                <input type="range" id="score-filter" class="filter-input" min="0" max="100" value="0" style="flex: 1; max-width: 200px;">
+                <span id="score-display">Min Score: 0%</span>
+            </div>
+            <button class="filter-btn" onclick="refreshData()">🔄 Refresh</button>
+            <button class="filter-btn secondary" onclick="exportData()">📥 Export</button>
+        </div>
+
+        <div id="stats-container" class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Analyzed</div>
+                <div class="stat-value" id="stat-total">--</div>
+                <div class="stat-change">stocks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Buy Signals</div>
+                <div class="stat-value" id="stat-buy">--</div>
+                <div class="stat-change">ready to buy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Fundamental Pass</div>
+                <div class="stat-value" id="stat-fundamental">--</div>
+                <div class="stat-change">strong fundamentals</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Score</div>
+                <div class="stat-value" id="stat-score">--</div>
+                <div class="stat-change">overall quality</div>
+            </div>
+        </div>
+
+        <div id="message-container"></div>
+        <div id="stocks-container" class="stocks-container"></div>
+    </div>
+
+    <div class="footer">
+        <p>Last updated: <span id="last-update">--</span> | Data updates every 5 minutes</p>
+        <p>Disclaimer: This tool is for educational purposes only. Always consult a financial advisor before trading.</p>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let allStocks = [];
+
+        async function fetchData() {
+            try {
+                const response = await axios.get(`${API_URL}/stocks`);
+                allStocks = response.data.stocks;
+                updateUI();
+            } catch (error) {
+                showError('Failed to fetch data. Make sure the API server is running on port 5000.');
+                console.error(error);
+            }
+        }
+
+        function filterStocks() {
+            const search = document.getElementById('search-stock').value.toUpperCase();
+            const signal = document.getElementById('signal-filter').value;
+            const minScore = parseInt(document.getElementById('score-filter').value);
+
+            return allStocks.filter(stock => {
+                const matchesSearch = stock.symbol.includes(search);
+                const matchesSignal = !signal || stock.final_signal === signal;
+                const matchesScore = (stock.fundamental_score || 0) >= minScore;
+                return matchesSearch && matchesSignal && matchesScore;
+            });
+        }
+
+        function updateUI() {
+            const filtered = filterStocks();
+            
+            // Update stats
+            const buyCount = allStocks.filter(s => s.final_signal === 'BUY').length;
+            const fundCount = allStocks.filter(s => s.fundamental_pass).length;
+            const avgScore = allStocks.reduce((sum, s) => sum + (s.fundamental_score || 0), 0) / allStocks.length;
+
+            document.getElementById('stat-total').textContent = allStocks.length;
+            document.getElementById('stat-buy').textContent = buyCount;
+            document.getElementById('stat-fundamental').textContent = fundCount;
+            document.getElementById('stat-score').textContent = avgScore.toFixed(0) + '%';
+
+            // Update last update time
+            const lastUpdate = allStocks[0]?.timestamp || new Date().toLocaleTimeString();
+            document.getElementById('last-update').textContent = new Date(lastUpdate).toLocaleTimeString();
+
+            // Render stocks
+            const container = document.getElementById('stocks-container');
+            container.innerHTML = filtered.map(stock => createStockCard(stock)).join('');
+        }
+
+        function createStockCard(stock) {
+            const f = stock.fundamentals;
+            const t = stock.technical;
+            const priceChange = ((stock.price - (stock.price * 0.98)) / stock.price * 100).toFixed(2);
+
+            return `
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div class="stock-info">
+                            <h3>${stock.symbol}</h3>
+                            <p>Score: ${(stock.fundamental_score || 0).toFixed(1)}%</p>
+                        </div>
+                        <div class="stock-price">
+                            <div class="price ${parseFloat(priceChange) >= 0 ? 'price-up' : 'price-down'}">
+                                ₹${stock.price.toFixed(2)} ${parseFloat(priceChange) >= 0 ? '↑' : '↓'} ${Math.abs(priceChange)}%
+                            </div>
+                            <div class="score">${stock.final_signal}</div>
+                        </div>
+                    </div>
+
+                    <div class="badges">
+                        <span class="badge ${stock.final_signal === 'BUY' ? 'badge-buy' : 'badge-sell'}">
+                            ${stock.final_signal}
+                        </span>
+                        ${stock.fundamental_pass ? '<span class="badge badge-buy">✓ Fundamental</span>' : ''}
+                        ${stock.technical_pass ? '<span class="badge badge-buy">✓ Technical</span>' : ''}
+                    </div>
+
+                    <div class="criteria-checks">
+                        ${createCriteriaChecks(stock)}
+                    </div>
+
+                    <div class="technical-info">
+                        <h4>Technical Analysis</h4>
+                        <div class="technical-grid">
+                            <div>Price > ST: ${t.price_above ? '✓' : '✗'}</div>
+                            <div>ST Level: ₹${t.supertrend.toFixed(2)}</div>
+                            <div>Signal: ${t.signal}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createCriteriaChecks(stock) {
+            const f = stock.fundamentals;
+            const checks = [
+                { name: 'EPS YoY', pass: f.eps?.passes },
+                { name: 'D/E Ratio', pass: f.debt_to_equity?.passes },
+                { name: 'Asset TO', pass: f.asset_turnover?.passes },
+                { name: 'Working Cap', pass: f.working_capital?.passes },
+                { name: 'Sales 15%', pass: f.sales_growth?.passes },
+                { name: 'ROCE 12%', pass: f.roce?.passes }
+            ];
+
+            return checks.map(check => `
+                <div class="check-item">
+                    <span class="check-icon ${check.pass ? 'check-pass' : 'check-fail'}">
+                        ${check.pass ? '✓' : '✗'}
+                    </span>
+                    <span>${check.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function refreshData() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '🔄 Updating...';
+            fetchData().finally(() => {
+                btn.disabled = false;
+                btn.textContent = '🔄 Refresh';
+            });
+        }
+
+        function exportData() {
+            const csv = [
+                ['Symbol', 'Price', 'Score', 'Signal', 'EPS YoY', 'D/E', 'Asset TO', 'Working Cap', 'Sales Growth', 'ROCE'],
+                ...allStocks.map(s => [
+                    s.symbol,
+                    s.price.toFixed(2),
+                    (s.fundamental_score || 0).toFixed(1),
+                    s.final_signal,
+                    s.fundamentals.eps?.passes ? 'Yes' : 'No',
+                    s.fundamentals.debt_to_equity?.ratio.toFixed(2) || '--',
+                    s.fundamentals.asset_turnover?.ratio.toFixed(2) || '--',
+                    s.fundamentals.working_capital?.ratio.toFixed(1) || '--',
+                    s.fundamentals.sales_growth?.growth.toFixed(1) || '--',
+                    s.fundamentals.roce?.roce.toFixed(1) || '--'
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stock_analysis_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        function showError(message) {
+            document.getElementById('message-container').innerHTML = 
+                `<div class="error">${message}</div>`;
+        }
+
+        function showSuccess(message) {
+            document.getElementById('message-container').innerHTML = 
+                `<div class="success">${message}</div>`;
+        }
+
+        // Event listeners
+        document.getElementById('score-filter').addEventListener('input', (e) => {
+            document.getElementById('score-display').textContent = `Min Score: ${e.target.value}%`;
+            updateUI();
+        });
+
+        document.getElementById('search-stock').addEventListener('input', updateUI);
+        document.getElementById('signal-filter').addEventListener('change', updateUI);
+
+        // Initial load
+        fetchData();
+        setInterval(fetchData, 300000); // Refresh every 5 minutes
+    </script>
+</body>
+</html>
