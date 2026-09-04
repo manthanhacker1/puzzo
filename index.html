@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tanvi ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--pink:#ff4f81;
+--purple:#8b5cf6;
+--muted:#aaa8b7;
+--bg:#07070d;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+background:var(--bg);
+color:white;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+overflow-x:hidden;
+}
+
+canvas{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:0;
+}
+
+.background-glow{
+position:fixed;
+width:600px;
+height:600px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(255,79,129,.13),transparent 70%);
+top:-250px;
+left:-200px;
+filter:blur(30px);
+pointer-events:none;
+}
+
+.background-glow.two{
+top:auto;
+left:auto;
+right:-250px;
+bottom:-250px;
+background:radial-gradient(circle,rgba(139,92,246,.14),transparent 70%);
+}
+
+.container{
+position:relative;
+z-index:2;
+width:min(1000px,90%);
+margin:auto;
+}
+
+section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:80px 0;
+}
+
+/* HERO */
+
+.hero{text-align:center}
+
+.small{
+color:#aaa6b7;
+text-transform:uppercase;
+letter-spacing:5px;
+font-size:11px;
+margin-bottom:25px;
+}
+
+.hero h1{
+font-size:clamp(65px,12vw,150px);
+line-height:.85;
+letter-spacing:-8px;
+background:linear-gradient(
+120deg,
+white,
+#ffd1df,
+#ff6f9c,
+#a78bfa
+);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero h2{
+margin-top:25px;
+font-size:clamp(20px,4vw,34px);
+font-weight:400;
+color:#dedbe6;
+}
+
+.hero p{
+max-width:650px;
+margin:25px auto;
+line-height:1.8;
+color:var(--muted);
+font-size:17px;
+}
+
+.button{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:15px 28px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,.15);
+color:white;
+text-decoration:none;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(15px);
+cursor:pointer;
+transition:.3s;
+font-weight:700;
+}
+
+.button:hover{
+transform:translateY(-4px);
+border-color:rgba(255,255,255,.35);
+}
+
+.primary{
+background:linear-gradient(135deg,var(--pink),var(--purple));
+border:none;
+box-shadow:0 15px 50px rgba(255,79,129,.25);
+}
+
+.scroll{
+margin-top:60px;
+color:#666371;
+font-size:12px;
+}
+
+/* CARDS */
+
+.card{
+width:100%;
+padding:clamp(28px,6vw,70px);
+border-radius:35px;
+background:rgba(255,255,255,.055);
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(25px);
+box-shadow:0 30px 100px rgba(0,0,0,.35);
+}
+
+.card h2{
+font-size:clamp(40px,7vw,75px);
+line-height:1;
+letter-spacing:-4px;
+margin-bottom:25px;
+}
+
+.card p{
+color:var(--muted);
+line-height:1.9;
+font-size:17px;
+}
+
+/* REASONS */
+
+.reasons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:40px;
+}
+
+.reason{
+padding:25px;
+min-height:190px;
+border-radius:24px;
+background:rgba(255,255,255,.045);
+border:1px solid rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.reason:hover{
+transform:translateY(-8px);
+background:rgba(255,255,255,.08);
+}
+
+.reason span{font-size:30px}
+
+.reason h3{margin:18px 0 10px}
+
+.reason p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* LETTER */
+
+.letter{
+font-family:Georgia,serif;
+font-size:clamp(20px,3vw,27px);
+line-height:1.9;
+white-space:pre-line;
+color:#f5eaf0;
+min-height:300px;
+}
+
+.cursor{
+display:inline-block;
+width:2px;
+height:25px;
+background:var(--pink);
+animation:blink .8s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0}
+}
+
+/* QUESTION */
+
+.question{text-align:center}
+
+.question h2{
+font-size:clamp(45px,8vw,90px);
+}
+
+.question p{
+max-width:600px;
+margin:auto;
+}
+
+.buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+#no{
+position:relative;
+}
+
+/* FINAL */
+
+.final{
+display:none;
+text-align:center;
+}
+
+.final.active{
+display:block;
+animation:appear .7s ease;
+}
+
+.final-heart{
+font-size:90px;
+animation:heartbeat 1.2s infinite;
+margin-bottom:20px;
+}
+
+@keyframes heartbeat{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.12)}
+}
+
+@keyframes appear{
+from{
+opacity:0;
+transform:scale(.9)
+}
+to{
+opacity:1;
+transform:scale(1)
+}
+}
+
+.signature{
+margin-top:25px;
+font-family:Georgia,serif;
+font-style:italic;
+color:#ddd2df;
+}
+
+/* HEARTS */
+
+.heart{
+position:fixed;
+bottom:-50px;
+z-index:100;
+pointer-events:none;
+animation:rise linear forwards;
+}
+
+@keyframes rise{
+0%{
+transform:
+translateY(0)
+rotate(0deg)
+scale(.7);
+opacity:1;
+}
+100%{
+transform:
+translateY(-110vh)
+rotate(360deg)
+scale(1.4);
+opacity:0;
+}
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.hero h1{
+letter-spacing:-4px;
+}
+
+.reasons{
+grid-template-columns:1fr;
+}
+
+.card{
+border-radius:25px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="background-glow"></div>
+<div class="background-glow two"></div>
+
+<div class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div>
+
+<div class="small">
+I made something instead of sending another text
+</div>
+
+<h1>
+Tanvi.
+</h1>
+
+<h2>
+I owe you a proper apology.
+</h2>
+
+<p>
+I could have typed three letters — “sorry” —
+and hoped that would somehow fix everything.
+But honestly, you deserve more effort than that.
+</p>
+
+<a href="#apology" class="button primary">
+Open this ❤️
+</a>
+
+<div class="scroll">
+↓ there's more
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APOLOGY -->
+
+<section id="apology">
+
+<div class="card">
+
+<div class="small">
+no excuses
+</div>
+
+<h2>
+I messed up.
+</h2>
+
+<p>
+Tanvi, whatever I said or did, I understand that it affected you.
+I'm not making excuses for it.
+I'm not trying to prove that I was right.
+I just want to acknowledge that I could have handled things better.
+</p>
+
+<br>
+
+<p>
+And honestly?
+Losing a little bit of your smile because of something I did
+is not something I'm proud of.
+</p>
+
+<div class="reasons">
+
+<div class="reason">
+
+<span>🫶</span>
+
+<h3>
+I understand.
+</h3>
+
+<p>
+Your feelings don't need a debate.
+If something hurt you, it matters.
+</p>
+
+</div>
+
+
+<div class="reason">
+
+<span>🤍</span>
+
+<h3>
+I'm sorry.
+</h3>
+
+<p>
+Not the automatic “sorry” people say
+just to end an argument.
+</p>
+
+</div>
+
+
+<div class="reason">
+
+<span>🌱</span>
+
+<h3>
+I'll do better.
+</h3>
+
+<p>
+An apology means more when the behavior
+actually changes afterwards.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LETTER -->
+
+<section>
+
+<div class="card">
+
+<div class="small">
+what I actually wanted to say
+</div>
+
+<div class="letter">
+
+<span id="typed"></span><span class="cursor"></span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUESTION -->
+
+<section>
+
+<div class="card question">
+
+<div id="questionBox">
+
+<div class="small">
+one tiny question
+</div>
+
+<h2>
+Can I make it up to you?
+</h2>
+
+<p>
+I'm not asking you to forget what happened.
+Just wondering if I can earn one little smile back.
+</p>
+
+<div class="buttons">
+
+<button
+class="button primary"
+onclick="yes()">
+
+Okay... one chance 💗
+
+</button>
+
+<button
+class="button"
+id="no">
+
+Still mad 😤
+
+</button>
+
+</div>
+
+<p
+id="message"
+style="margin-top:20px;font-size:13px;">
+</p>
+
+</div>
+
+
+<!-- FINAL -->
+
+<div class="final" id="final">
+
+<div class="final-heart">
+💗
+</div>
+
+<div class="small">
+best answer ever
+</div>
+
+<h2>
+I'll take that chance.
+</h2>
+
+<p>
+No dramatic promises.
+No cheesy speeches.
+
+Just me trying to be a little better,
+make you laugh a little more,
+and give you fewer reasons to be mad at me.
+</p>
+
+<div class="signature">
+— Manthan
+</div>
+
+<br>
+
+<button
+class="button primary"
+onclick="heartExplosion()">
+
+One last surprise ✨
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   TANVI ❤️ MANTHAN
+   ========================================== */
+
+const HER_NAME = "Tanvi";
+const YOUR_NAME = "Manthan";
+
+const MESSAGE = `
+Tanvi,
+
+I don't expect a website to magically fix everything.
+
+I made this because I wanted you to know something simple:
+
+I'm genuinely sorry.
+
+You mean more to me than my ego ever should.
+
+I could sit here and write a hundred explanations,
+but I'd rather just admit that I messed up.
+
+If you're willing to give me another chance,
+I won't waste it.
+
+And if this website managed to make you smile
+even for two seconds...
+
+then honestly,
+
+I'll consider this mission partially successful. ❤️
+
+— Manthan
+`;
+
+
+/* NAME */
+
+document.querySelector(".signature").textContent =
+"— " + YOUR_NAME;
+
+
+/* TYPEWRITER */
+
+const typed =
+document.getElementById("typed");
+
+let index = 0;
+
+function typeText(){
+
+if(index < MESSAGE.length){
+
+typed.textContent +=
+MESSAGE[index];
+
+index++;
+
+let delay = 28;
+
+if(MESSAGE[index - 1] === "\n"){
+delay = 350;
+}
+
+setTimeout(typeText,delay);
+
+}
+
+}
+
+setTimeout(typeText,900);
+
+
+/* NO BUTTON */
+
+const noButton =
+document.getElementById("no");
+
+const message =
+document.getElementById("message");
+
+let attempts = 0;
+
+const responses = [
+
+"Okay 😭 I deserved that.",
+
+"Fair enough...",
+
+"I'll accept my punishment.",
+
+"You are REALLY committed to this 😭",
+
+"Okay okay... I'll stop bothering you.",
+
+"But I still hope you smile today. ❤️"
+
+];
+
+function moveNoButton(){
+
+attempts++;
+
+message.textContent =
+responses[
+Math.min(
+attempts - 1,
+responses.length - 1
+)
+];
+
+if(attempts < 5){
+
+const x =
+Math.random() * 220 - 110;
+
+const y =
+Math.random() * 120 - 60;
+
+noButton.style.transform =
+`translate(${x}px,${y}px)`;
+
+}
+
+else{
+
+noButton.textContent =
+"Okay... maybe 🥹";
+
+noButton.style.transform =
+"none";
+
+}
+
+}
+
+noButton.addEventListener(
+"mouseenter",
+moveNoButton
+);
+
+noButton.addEventListener(
+"click",
+moveNoButton
+);
+
+
+/* YES */
+
+function yes(){
+
+document.getElementById(
+"questionBox"
+).style.display = "none";
+
+document.getElementById(
+"final"
+).classList.add("active");
+
+heartExplosion();
+
+}
+
+
+/* HEART EXPLOSION */
+
+function heartExplosion(){
+
+const emojis = [
+
+"❤️",
+"💗",
+"💖",
+"💘",
+"💕",
+"✨",
+"🌷",
+"🥹"
+
+];
+
+for(let i=0;i<65;i++){
+
+setTimeout(()=>{
+
+const heart =
+document.createElement("div");
+
+heart.className =
+"heart";
+
+heart.textContent =
+emojis[
+Math.floor(
+Math.random() *
+emojis.length
+)
+];
+
+heart.style.left =
+Math.random()*100+"vw";
+
+heart.style.fontSize =
+(14+Math.random()*30)+"px";
+
+heart.style.animationDuration =
+(3+Math.random()*4)+"s";
+
+document.body.appendChild(
+heart
+);
+
+setTimeout(()=>{
+heart.remove();
+},7000);
+
+},i*45);
+
+}
+
+}
+
+
+/* STAR FIELD */
+
+const canvas =
+document.getElementById("stars");
+
+const ctx =
+canvas.getContext("2d");
+
+let stars = [];
+
+function resizeCanvas(){
+
+canvas.width =
+window.innerWidth *
+window.devicePixelRatio;
+
+canvas.height =
+window.innerHeight *
+window.devicePixelRatio;
+
+ctx.setTransform(
+window.devicePixelRatio,
+0,
+0,
+window.devicePixelRatio,
+0,
+0
+);
+
+stars=[];
+
+const count =
+Math.min(
+180,
+Math.floor(
+window.innerWidth / 6
+)
+);
+
+for(let i=0;i<count;i++){
+
+stars.push({
+
+x:
+Math.random() *
+window.innerWidth,
+
+y:
+Math.random() *
+window.innerHeight,
+
+radius:
+Math.random()*1.3,
+
+speed:
+.05 +
+Math.random()*.25,
+
+opacity:
+.2 +
+Math.random()*.8
+
+});
+
+}
+
+}
+
+
+function drawStars(){
+
+ctx.clearRect(
+0,
+0,
+window.innerWidth,
+window.innerHeight
+);
+
+for(const star of stars){
+
+star.y -= star.speed;
+
+if(star.y < 0){
+star.y =
+window.innerHeight;
+}
+
+ctx.beginPath();
+
+ctx.arc(
+star.x,
+star.y,
+star.radius,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle =
+`rgba(255,255,255,${star.opacity})`;
+
+ctx.fill();
+
+}
+
+requestAnimationFrame(
+drawStars
+);
+
+}
+
+
+window.addEventListener(
+"resize",
+resizeCanvas
+);
+
+resizeCanvas();
+drawStars();
+
+</script>
+
+</body>
+</html>
