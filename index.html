@@ -6,463 +6,394 @@
 <title>For Tanvi ❤️</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-:root{
---pink:#ff4f81;
---purple:#8b5cf6;
---muted:#aaa8b7;
---bg:#07070d;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{scroll-behavior:smooth}
-
-body{
-background:var(--bg);
-color:white;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-overflow-x:hidden;
+html {
+    scroll-behavior: smooth;
 }
 
-canvas{
-position:fixed;
-inset:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:0;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #08070c;
+    color: white;
+    overflow-x: hidden;
 }
 
-.background-glow{
-position:fixed;
-width:600px;
-height:600px;
-border-radius:50%;
-background:radial-gradient(circle,rgba(255,79,129,.13),transparent 70%);
-top:-250px;
-left:-200px;
-filter:blur(30px);
-pointer-events:none;
+/* ---------- BACKGROUND ---------- */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 65, 120, .18), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(165, 70, 255, .16), transparent 30%),
+        #08070c;
 }
 
-.background-glow.two{
-top:auto;
-left:auto;
-right:-250px;
-bottom:-250px;
-background:radial-gradient(circle,rgba(139,92,246,.14),transparent 70%);
+.noise {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    pointer-events: none;
+    opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
-.container{
-position:relative;
-z-index:2;
-width:min(1000px,90%);
-margin:auto;
+canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
 }
 
-section{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:80px 0;
+/* ---------- HERO ---------- */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    position: relative;
 }
 
-/* HERO */
-
-.hero{text-align:center}
-
-.small{
-color:#aaa6b7;
-text-transform:uppercase;
-letter-spacing:5px;
-font-size:11px;
-margin-bottom:25px;
+.hero-content {
+    max-width: 850px;
 }
 
-.hero h1{
-font-size:clamp(65px,12vw,150px);
-line-height:.85;
-letter-spacing:-8px;
-background:linear-gradient(
-120deg,
-white,
-#ffd1df,
-#ff6f9c,
-#a78bfa
-);
--webkit-background-clip:text;
-color:transparent;
+.small {
+    color: #ff8eb3;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 25px;
+    animation: fadeUp 1s ease forwards;
 }
 
-.hero h2{
-margin-top:25px;
-font-size:clamp(20px,4vw,34px);
-font-weight:400;
-color:#dedbe6;
+h1 {
+    font-size: clamp(55px, 11vw, 130px);
+    line-height: .9;
+    letter-spacing: -7px;
+    margin-bottom: 35px;
+    background: linear-gradient(
+        120deg,
+        #fff,
+        #ff9fbd,
+        #ff477e,
+        #c77dff,
+        #fff
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient 6s ease infinite, fadeUp 1s ease forwards;
 }
 
-.hero p{
-max-width:650px;
-margin:25px auto;
-line-height:1.8;
-color:var(--muted);
-font-size:17px;
+.hero p {
+    color: #bdb8c6;
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: auto;
 }
 
-.button{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:15px 28px;
-border-radius:999px;
-border:1px solid rgba(255,255,255,.15);
-color:white;
-text-decoration:none;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(15px);
-cursor:pointer;
-transition:.3s;
-font-weight:700;
+.scroll {
+    position: absolute;
+    bottom: 30px;
+    font-size: 11px;
+    color: #77727f;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
 }
 
-.button:hover{
-transform:translateY(-4px);
-border-color:rgba(255,255,255,.35);
+/* ---------- SECTIONS ---------- */
+
+section {
+    min-height: 100vh;
+    padding: 100px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.primary{
-background:linear-gradient(135deg,var(--pink),var(--purple));
-border:none;
-box-shadow:0 15px 50px rgba(255,79,129,.25);
+.container {
+    width: 100%;
+    max-width: 900px;
 }
 
-.scroll{
-margin-top:60px;
-color:#666371;
-font-size:12px;
+.section-label {
+    color: #ff719b;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 11px;
+    margin-bottom: 20px;
 }
 
-/* CARDS */
-
-.card{
-width:100%;
-padding:clamp(28px,6vw,70px);
-border-radius:35px;
-background:rgba(255,255,255,.055);
-border:1px solid rgba(255,255,255,.1);
-backdrop-filter:blur(25px);
-box-shadow:0 30px 100px rgba(0,0,0,.35);
+.section-title {
+    font-size: clamp(35px, 7vw, 75px);
+    line-height: 1;
+    margin-bottom: 35px;
+    letter-spacing: -3px;
 }
 
-.card h2{
-font-size:clamp(40px,7vw,75px);
-line-height:1;
-letter-spacing:-4px;
-margin-bottom:25px;
+/* ---------- CARD ---------- */
+
+.card {
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 30px;
+    padding: 45px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 100px rgba(0,0,0,.4);
 }
 
-.card p{
-color:var(--muted);
-line-height:1.9;
-font-size:17px;
+.card p {
+    color: #c5c0cb;
+    line-height: 2;
+    font-size: 17px;
+    margin-bottom: 20px;
 }
 
-/* REASONS */
-
-.reasons{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:40px;
+.signature {
+    color: #ff8cac !important;
+    font-size: 20px !important;
+    margin-top: 35px;
 }
 
-.reason{
-padding:25px;
-min-height:190px;
-border-radius:24px;
-background:rgba(255,255,255,.045);
-border:1px solid rgba(255,255,255,.08);
-transition:.3s;
+/* ---------- INTERACTIVE ---------- */
+
+.question {
+    text-align: center;
 }
 
-.reason:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.08);
+.question h2 {
+    font-size: clamp(35px, 7vw, 70px);
+    margin-bottom: 20px;
 }
 
-.reason span{font-size:30px}
-
-.reason h3{margin:18px 0 10px}
-
-.reason p{
-font-size:14px;
-line-height:1.6;
+.question p {
+    color: #aaa5b0;
+    margin-bottom: 35px;
 }
 
-/* LETTER */
-
-.letter{
-font-family:Georgia,serif;
-font-size:clamp(20px,3vw,27px);
-line-height:1.9;
-white-space:pre-line;
-color:#f5eaf0;
-min-height:300px;
+button {
+    border: none;
+    cursor: pointer;
+    padding: 16px 30px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s;
 }
 
-.cursor{
-display:inline-block;
-width:2px;
-height:25px;
-background:var(--pink);
-animation:blink .8s infinite;
+.yes {
+    color: white;
+    background: linear-gradient(135deg, #ff477e, #b24cff);
+    box-shadow: 0 10px 40px rgba(255,71,126,.25);
 }
 
-@keyframes blink{
-50%{opacity:0}
+.yes:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 50px rgba(255,71,126,.4);
 }
 
-/* QUESTION */
-
-.question{text-align:center}
-
-.question h2{
-font-size:clamp(45px,8vw,90px);
+.no {
+    background: #19171e;
+    color: #aaa;
+    margin-left: 10px;
+    position: relative;
 }
 
-.question p{
-max-width:600px;
-margin:auto;
+/* ---------- SECRET ---------- */
+
+.secret {
+    display: none;
+    margin-top: 35px;
+    padding: 35px;
+    border-radius: 25px;
+    background: rgba(255, 70, 125, .08);
+    border: 1px solid rgba(255, 100, 150, .15);
+    animation: pop .5s ease;
 }
 
-.buttons{
-margin-top:35px;
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
+.secret.show {
+    display: block;
 }
 
-#no{
-position:relative;
+.secret span {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 15px;
 }
 
-/* FINAL */
+/* ---------- MEMORY ---------- */
 
-.final{
-display:none;
-text-align:center;
+.memories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
-.final.active{
-display:block;
-animation:appear .7s ease;
+.memory {
+    min-height: 180px;
+    padding: 25px;
+    border-radius: 25px;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.025)
+    );
+    border: 1px solid rgba(255,255,255,.08);
+    display: flex;
+    align-items: end;
+    transition: .4s;
 }
 
-.final-heart{
-font-size:90px;
-animation:heartbeat 1.2s infinite;
-margin-bottom:20px;
+.memory:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,100,150,.4);
 }
 
-@keyframes heartbeat{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.12)}
+.memory h3 {
+    font-size: 17px;
 }
 
-@keyframes appear{
-from{
-opacity:0;
-transform:scale(.9)
-}
-to{
-opacity:1;
-transform:scale(1)
-}
+.memory p {
+    color: #99939f;
+    font-size: 12px;
+    margin-top: 7px;
 }
 
-.signature{
-margin-top:25px;
-font-family:Georgia,serif;
-font-style:italic;
-color:#ddd2df;
+/* ---------- FINAL ---------- */
+
+.final {
+    text-align: center;
+    min-height: 100vh;
 }
 
-/* HEARTS */
-
-.heart{
-position:fixed;
-bottom:-50px;
-z-index:100;
-pointer-events:none;
-animation:rise linear forwards;
+.heart {
+    font-size: 90px;
+    animation: heartbeat 1.4s infinite;
+    margin-bottom: 25px;
 }
 
-@keyframes rise{
-0%{
-transform:
-translateY(0)
-rotate(0deg)
-scale(.7);
-opacity:1;
-}
-100%{
-transform:
-translateY(-110vh)
-rotate(360deg)
-scale(1.4);
-opacity:0;
-}
+.final h2 {
+    font-size: clamp(40px, 8vw, 85px);
+    letter-spacing: -4px;
 }
 
-/* MOBILE */
-
-@media(max-width:700px){
-
-.hero h1{
-letter-spacing:-4px;
+.final p {
+    color: #aaa5b0;
+    max-width: 550px;
+    margin: 25px auto 40px;
+    line-height: 1.8;
 }
 
-.reasons{
-grid-template-columns:1fr;
+/* ---------- FOOTER ---------- */
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #55515b;
+    font-size: 12px;
 }
 
-.card{
-border-radius:25px;
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes gradient {
+    0% { background-position: 0%; }
+    50% { background-position: 100%; }
+    100% { background-position: 0%; }
 }
 
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    20% { transform: scale(1.12); }
+    40% { transform: scale(1); }
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media(max-width:700px) {
+    .memories {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 28px;
+    }
+
+    .no {
+        margin-left: 0;
+        margin-top: 12px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="stars"></canvas>
-
-<div class="background-glow"></div>
-<div class="background-glow two"></div>
-
-<div class="container">
+<div class="background"></div>
+<div class="noise"></div>
+<canvas id="particles"></canvas>
 
 <!-- HERO -->
 
 <section class="hero">
 
-<div>
+    <div class="hero-content">
 
-<div class="small">
-I made something instead of sending another text
-</div>
+        <div class="small">
+            A message from Manthan
+        </div>
 
-<h1>
-Tanvi.
-</h1>
+        <h1>
+            Tanvi,<br>
+            I'm Sorry.
+        </h1>
 
-<h2>
-I owe you a proper apology.
-</h2>
+        <p>
+            I could have written a normal apology...
+            but you deserve something a little more memorable.
+        </p>
 
-<p>
-I could have typed three letters — “sorry” —
-and hoped that would somehow fix everything.
-But honestly, you deserve more effort than that.
-</p>
+    </div>
 
-<a href="#apology" class="button primary">
-Open this ❤️
-</a>
-
-<div class="scroll">
-↓ there's more
-</div>
-
-</div>
-
-</section>
-
-
-<!-- APOLOGY -->
-
-<section id="apology">
-
-<div class="card">
-
-<div class="small">
-no excuses
-</div>
-
-<h2>
-I messed up.
-</h2>
-
-<p>
-Tanvi, whatever I said or did, I understand that it affected you.
-I'm not making excuses for it.
-I'm not trying to prove that I was right.
-I just want to acknowledge that I could have handled things better.
-</p>
-
-<br>
-
-<p>
-And honestly?
-Losing a little bit of your smile because of something I did
-is not something I'm proud of.
-</p>
-
-<div class="reasons">
-
-<div class="reason">
-
-<span>🫶</span>
-
-<h3>
-I understand.
-</h3>
-
-<p>
-Your feelings don't need a debate.
-If something hurt you, it matters.
-</p>
-
-</div>
-
-
-<div class="reason">
-
-<span>🤍</span>
-
-<h3>
-I'm sorry.
-</h3>
-
-<p>
-Not the automatic “sorry” people say
-just to end an argument.
-</p>
-
-</div>
-
-
-<div class="reason">
-
-<span>🌱</span>
-
-<h3>
-I'll do better.
-</h3>
-
-<p>
-An apology means more when the behavior
-actually changes afterwards.
-</p>
-
-</div>
-
-</div>
-
-</div>
+    <div class="scroll">
+        ↓ keep scrolling
+    </div>
 
 </section>
 
@@ -471,462 +402,456 @@ actually changes afterwards.
 
 <section>
 
-<div class="card">
+    <div class="container">
 
-<div class="small">
-what I actually wanted to say
-</div>
+        <div class="section-label">
+            Chapter 01
+        </div>
 
-<div class="letter">
+        <h2 class="section-title">
+            No excuses.<br>
+            Just honesty.
+        </h2>
 
-<span id="typed"></span><span class="cursor"></span>
+        <div class="card">
 
-</div>
+            <p>
+                Tanvi, I know saying "sorry" doesn't magically
+                undo anything. And honestly, I don't want to hide
+                behind excuses or explanations.
+            </p>
 
-</div>
+            <p>
+                If something I said or did hurt you,
+                I'm genuinely sorry.
+            </p>
+
+            <p>
+                You didn't deserve to feel bad because of me.
+                I should have handled things better, and I take
+                responsibility for that.
+            </p>
+
+            <p>
+                I'm not asking you to forget what happened.
+                I'm only asking you to believe that the apology
+                is real.
+            </p>
+
+            <p class="signature">
+                — Manthan ❤️
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- QUESTION -->
+<!-- MEMORIES -->
 
 <section>
 
-<div class="card question">
+    <div class="container">
 
-<div id="questionBox">
+        <div class="section-label">
+            Chapter 02
+        </div>
 
-<div class="small">
-one tiny question
-</div>
+        <h2 class="section-title">
+            Things worth<br>
+            remembering.
+        </h2>
 
-<h2>
-Can I make it up to you?
-</h2>
+        <div class="memories">
 
-<p>
-I'm not asking you to forget what happened.
-Just wondering if I can earn one little smile back.
-</p>
+            <div class="memory">
+                <div>
+                    <h3>01 — Your Smile</h3>
+                    <p>
+                        Somehow it makes everything
+                        feel a little less complicated.
+                    </p>
+                </div>
+            </div>
 
-<div class="buttons">
+            <div class="memory">
+                <div>
+                    <h3>02 — Your Vibe</h3>
+                    <p>
+                        Completely your own.
+                        And honestly, that's rare.
+                    </p>
+                </div>
+            </div>
 
-<button
-class="button primary"
-onclick="yes()">
+            <div class="memory">
+                <div>
+                    <h3>03 — You</h3>
+                    <p>
+                        The person this entire website
+                        was ridiculously made for.
+                    </p>
+                </div>
+            </div>
 
-Okay... one chance 💗
+        </div>
 
-</button>
+    </div>
 
-<button
-class="button"
-id="no">
+</section>
 
-Still mad 😤
 
-</button>
+<!-- INTERACTIVE QUESTION -->
 
-</div>
+<section>
 
-<p
-id="message"
-style="margin-top:20px;font-size:13px;">
-</p>
+    <div class="container question">
 
-</div>
+        <div class="section-label">
+            Chapter 03
+        </div>
+
+        <h2>
+            Can I get<br>
+            one tiny chance?
+        </h2>
+
+        <p>
+            Not to erase everything.<br>
+            Just to make things right.
+        </p>
+
+        <button class="yes" onclick="forgive()">
+            Okay, maybe ❤️
+        </button>
+
+        <button class="no" id="noBtn">
+            Nope 😶
+        </button>
+
+        <div class="secret" id="secret">
+
+            <span>🥹❤️</span>
+
+            <h3>
+                I promise I'll make it worth it.
+            </h3>
+
+            <p>
+                And yes, I know that was suspiciously
+                easy to click.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- FINAL -->
 
-<div class="final" id="final">
+<section class="final">
 
-<div class="final-heart">
-💗
-</div>
+    <div>
 
-<div class="small">
-best answer ever
-</div>
+        <div class="heart">
+            ❤️
+        </div>
 
-<h2>
-I'll take that chance.
-</h2>
+        <h2>
+            One last thing.
+        </h2>
 
-<p>
-No dramatic promises.
-No cheesy speeches.
+        <p>
+            Whatever you decide, I genuinely hope
+            you're happy. But if there's even a tiny
+            part of you willing to give me another chance...
+        </p>
 
-Just me trying to be a little better,
-make you laugh a little more,
-and give you fewer reasons to be mad at me.
-</p>
+        <button class="yes" onclick="celebrate()">
+            Let's start again ✨
+        </button>
 
-<div class="signature">
-— Manthan
-</div>
-
-<br>
-
-<button
-class="button primary"
-onclick="heartExplosion()">
-
-One last surprise ✨
-
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-</div>
+
+<footer>
+    Made with too much overthinking by Manthan ❤️
+</footer>
 
 
 <script>
 
-/* ==========================================
-   TANVI ❤️ MANTHAN
-   ========================================== */
+/* =========================
+   NO BUTTON ESCAPE
+========================= */
 
-const HER_NAME = "Tanvi";
-const YOUR_NAME = "Manthan";
+const noBtn = document.getElementById("noBtn");
 
-const MESSAGE = `
-Tanvi,
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
 
-I don't expect a website to magically fix everything.
+function moveButton() {
 
-I made this because I wanted you to know something simple:
+    const padding = 30;
 
-I'm genuinely sorry.
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-You mean more to me than my ego ever should.
+    const x = Math.max(
+        padding,
+        Math.random() * maxX
+    );
 
-I could sit here and write a hundred explanations,
-but I'd rather just admit that I messed up.
+    const y = Math.max(
+        padding,
+        Math.random() * maxY
+    );
 
-If you're willing to give me another chance,
-I won't waste it.
-
-And if this website managed to make you smile
-even for two seconds...
-
-then honestly,
-
-I'll consider this mission partially successful. ❤️
-
-— Manthan
-`;
-
-
-/* NAME */
-
-document.querySelector(".signature").textContent =
-"— " + YOUR_NAME;
-
-
-/* TYPEWRITER */
-
-const typed =
-document.getElementById("typed");
-
-let index = 0;
-
-function typeText(){
-
-if(index < MESSAGE.length){
-
-typed.textContent +=
-MESSAGE[index];
-
-index++;
-
-let delay = 28;
-
-if(MESSAGE[index - 1] === "\n"){
-delay = 350;
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 }
 
-setTimeout(typeText,delay);
 
-}
+/* =========================
+   FORGIVENESS
+========================= */
 
-}
+function forgive() {
 
-setTimeout(typeText,900);
+    document
+        .getElementById("secret")
+        .classList.add("show");
 
-
-/* NO BUTTON */
-
-const noButton =
-document.getElementById("no");
-
-const message =
-document.getElementById("message");
-
-let attempts = 0;
-
-const responses = [
-
-"Okay 😭 I deserved that.",
-
-"Fair enough...",
-
-"I'll accept my punishment.",
-
-"You are REALLY committed to this 😭",
-
-"Okay okay... I'll stop bothering you.",
-
-"But I still hope you smile today. ❤️"
-
-];
-
-function moveNoButton(){
-
-attempts++;
-
-message.textContent =
-responses[
-Math.min(
-attempts - 1,
-responses.length - 1
-)
-];
-
-if(attempts < 5){
-
-const x =
-Math.random() * 220 - 110;
-
-const y =
-Math.random() * 120 - 60;
-
-noButton.style.transform =
-`translate(${x}px,${y}px)`;
-
-}
-
-else{
-
-noButton.textContent =
-"Okay... maybe 🥹";
-
-noButton.style.transform =
-"none";
-
-}
-
-}
-
-noButton.addEventListener(
-"mouseenter",
-moveNoButton
-);
-
-noButton.addEventListener(
-"click",
-moveNoButton
-);
-
-
-/* YES */
-
-function yes(){
-
-document.getElementById(
-"questionBox"
-).style.display = "none";
-
-document.getElementById(
-"final"
-).classList.add("active");
-
-heartExplosion();
+    createHearts();
 
 }
 
 
-/* HEART EXPLOSION */
+/* =========================
+   CELEBRATION
+========================= */
 
-function heartExplosion(){
+function celebrate() {
 
-const emojis = [
+    for(let i = 0; i < 80; i++) {
 
-"❤️",
-"💗",
-"💖",
-"💘",
-"💕",
-"✨",
-"🌷",
-"🥹"
+        setTimeout(() => {
 
-];
+            const heart = document.createElement("div");
 
-for(let i=0;i<65;i++){
+            heart.innerHTML =
+                ["❤️","💗","💖","💕","✨"][Math.floor(Math.random()*5)];
 
-setTimeout(()=>{
+            heart.style.position = "fixed";
+            heart.style.left = Math.random()*100 + "vw";
+            heart.style.top = "-20px";
+            heart.style.fontSize =
+                (15 + Math.random()*30) + "px";
 
-const heart =
-document.createElement("div");
+            heart.style.zIndex = "9999";
+            heart.style.pointerEvents = "none";
 
-heart.className =
-"heart";
+            document.body.appendChild(heart);
 
-heart.textContent =
-emojis[
-Math.floor(
-Math.random() *
-emojis.length
-)
-];
+            const duration =
+                2000 + Math.random()*2500;
 
-heart.style.left =
-Math.random()*100+"vw";
+            heart.animate(
+                [
+                    {
+                        transform: "translateY(0) rotate(0deg)",
+                        opacity: 1
+                    },
+                    {
+                        transform:
+                            `translateY(${window.innerHeight + 100}px)
+                             rotate(${Math.random()*720}deg)`,
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration: duration,
+                    easing: "cubic-bezier(.2,.8,.3,1)"
+                }
+            );
 
-heart.style.fontSize =
-(14+Math.random()*30)+"px";
+            setTimeout(() => heart.remove(), duration);
 
-heart.style.animationDuration =
-(3+Math.random()*4)+"s";
-
-document.body.appendChild(
-heart
-);
-
-setTimeout(()=>{
-heart.remove();
-},7000);
-
-},i*45);
-
-}
+        }, i * 20);
+    }
 
 }
 
 
-/* STAR FIELD */
+/* =========================
+   SMALL HEART BURST
+========================= */
 
-const canvas =
-document.getElementById("stars");
+function createHearts() {
 
-const ctx =
-canvas.getContext("2d");
+    for(let i = 0; i < 25; i++) {
 
-let stars = [];
+        const heart = document.createElement("div");
 
-function resizeCanvas(){
+        heart.innerHTML = "❤️";
 
-canvas.width =
-window.innerWidth *
-window.devicePixelRatio;
+        heart.style.position = "fixed";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.zIndex = "9999";
+        heart.style.pointerEvents = "none";
 
-canvas.height =
-window.innerHeight *
-window.devicePixelRatio;
+        document.body.appendChild(heart);
 
-ctx.setTransform(
-window.devicePixelRatio,
-0,
-0,
-window.devicePixelRatio,
-0,
-0
-);
+        const x =
+            (Math.random() - .5) * 500;
 
-stars=[];
+        const y =
+            (Math.random() - .5) * 500;
 
-const count =
-Math.min(
-180,
-Math.floor(
-window.innerWidth / 6
-)
-);
+        heart.animate(
+            [
+                {
+                    transform: "translate(-50%,-50%) scale(0)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translate(calc(-50% + ${x}px),
+                                   calc(-50% + ${y}px))
+                         scale(1.5)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 1200,
+                easing: "ease-out"
+            }
+        );
 
-for(let i=0;i<count;i++){
-
-stars.push({
-
-x:
-Math.random() *
-window.innerWidth,
-
-y:
-Math.random() *
-window.innerHeight,
-
-radius:
-Math.random()*1.3,
-
-speed:
-.05 +
-Math.random()*.25,
-
-opacity:
-.2 +
-Math.random()*.8
-
-});
-
-}
+        setTimeout(() => heart.remove(), 1200);
+    }
 
 }
 
 
-function drawStars(){
+/* =========================
+   PARTICLE BACKGROUND
+========================= */
 
-ctx.clearRect(
-0,
-0,
-window.innerWidth,
-window.innerHeight
-);
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
-for(const star of stars){
+let particles = [];
 
-star.y -= star.speed;
+function resizeCanvas() {
 
-if(star.y < 0){
-star.y =
-window.innerHeight;
-}
-
-ctx.beginPath();
-
-ctx.arc(
-star.x,
-star.y,
-star.radius,
-0,
-Math.PI*2
-);
-
-ctx.fillStyle =
-`rgba(255,255,255,${star.opacity})`;
-
-ctx.fill();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
 }
-
-requestAnimationFrame(
-drawStars
-);
-
-}
-
-
-window.addEventListener(
-"resize",
-resizeCanvas
-);
 
 resizeCanvas();
-drawStars();
+
+window.addEventListener("resize", resizeCanvas);
+
+for(let i = 0; i < 80; i++) {
+
+    particles.push({
+
+        x: Math.random() * window.innerWidth,
+
+        y: Math.random() * window.innerHeight,
+
+        size: Math.random() * 2 + .5,
+
+        speed:
+            Math.random() * .4 + .1,
+
+        opacity:
+            Math.random() * .5 + .1
+
+    });
+
+}
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p => {
+
+        p.y -= p.speed;
+
+        if(p.y < -10) {
+
+            p.y = canvas.height + 10;
+
+            p.x = Math.random() *
+                canvas.width;
+
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(255,150,190,${p.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(animateParticles);
+
+}
+
+animateParticles();
+
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+const glow = document.createElement("div");
+
+glow.style.position = "fixed";
+glow.style.width = "250px";
+glow.style.height = "250px";
+glow.style.borderRadius = "50%";
+glow.style.pointerEvents = "none";
+glow.style.zIndex = "-2";
+glow.style.background =
+    "radial-gradient(circle, rgba(255,70,130,.08), transparent 70%)";
+glow.style.transform = "translate(-50%,-50%)";
+
+document.body.appendChild(glow);
+
+document.addEventListener("mousemove", e => {
+
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+
+});
 
 </script>
 
