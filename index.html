@@ -1,129 +1,195 @@
 <!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>A Little Something 💌</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
-*{box-sizing:border-box;margin:0;padding:0}
+@import url(
+  'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap'
+);
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-  background:linear-gradient(135deg,#fff8fb,#fff,#fff7f1);
+  background:
+    radial-gradient(
+      circle at top left,
+      #fff0f5,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff9fb,
+      #ffffff,
+      #fff7f2
+    );
+
   color:#292126;
   font-family:"DM Sans",sans-serif;
 }
 
 .container{
-  width:min(1100px,92%);
+  width:min(1080px,92%);
   margin:auto;
 }
 
+
+/* HERO */
+
 .hero{
   text-align:center;
-  padding:85px 20px 60px;
+  padding:90px 20px 60px;
 }
 
 .eyebrow{
   color:#ad7185;
-  font-size:12px;
+  font-size:11px;
   letter-spacing:4px;
   text-transform:uppercase;
   font-weight:700;
 }
 
-h1{
+.hero h1{
   font-family:"Playfair Display",serif;
-  font-size:clamp(55px,9vw,100px);
-  line-height:.95;
-  margin:18px 0 25px;
+  font-size:clamp(55px,9vw,105px);
+  line-height:.92;
+  font-weight:500;
+  margin:20px 0 25px;
 }
 
 .hero p{
-  color:#81737a;
-  font-size:17px;
-  line-height:1.7;
   max-width:650px;
   margin:auto;
+  color:#7e7077;
+  font-size:17px;
+  line-height:1.8;
 }
+
+
+/* PRODUCT */
 
 .product{
-  background:white;
-  border:1px solid #f0dfe5;
-  border-radius:30px;
-  padding:15px;
-  box-shadow:0 20px 60px rgba(70,35,50,.08);
   max-width:780px;
-  margin:20px auto 80px;
+  margin:20px auto 90px;
+
+  background:rgba(255,255,255,.94);
+
+  border:1px solid #f0dfe5;
+  border-radius:32px;
+
+  padding:14px;
+
+  box-shadow:
+    0 25px 70px rgba(65,30,45,.10);
 }
 
-.product img{
+.product-image{
   width:100%;
   height:650px;
+
   object-fit:cover;
-  border-radius:23px;
+
   display:block;
+
+  border-radius:25px;
 }
 
-.info{
-  padding:30px 18px 20px;
+.product-info{
+  padding:32px 20px 22px;
 }
 
 .badge{
   display:inline-block;
+
+  padding:8px 14px;
+
+  border-radius:30px;
+
   background:#fff0f5;
   color:#a4516e;
-  padding:7px 14px;
-  border-radius:30px;
+
   font-size:11px;
   font-weight:700;
+
   letter-spacing:1px;
 }
 
-.info h2{
+.product-info h2{
   font-family:"Playfair Display",serif;
-  font-size:42px;
-  margin:15px 0 5px;
+  font-size:45px;
+
+  margin-top:15px;
+  margin-bottom:5px;
 }
 
 .tagline{
   color:#806f77;
-  margin-bottom:25px;
+  margin-bottom:27px;
 }
+
+
+/* DETAILS */
 
 .details{
   border-top:1px solid #eee;
+
   padding-top:20px;
+
   display:grid;
-  gap:14px;
+  gap:15px;
 }
 
 .detail{
   display:flex;
   justify-content:space-between;
-  color:#62555c;
+
   font-size:14px;
+
+  color:#62555c;
 }
 
-.detail span:last-child{
+.detail-value{
   color:#a4516e;
   text-align:right;
 }
 
+
+/* BUTTON */
+
 .order-btn{
-  margin-top:30px;
   width:100%;
+
+  margin-top:32px;
+
   padding:17px;
-  border:none;
+
+  border:0;
   border-radius:50px;
+
   background:#292126;
-  color:#fff;
+  color:white;
+
   font-size:15px;
   font-weight:700;
+
   cursor:pointer;
+
   transition:.25s;
 }
 
@@ -132,39 +198,65 @@ h1{
   transform:translateY(-2px);
 }
 
+
+/* CHECKOUT */
+
 .checkout{
   display:none;
-  text-align:center;
-  padding:65px 25px;
-  margin:0 auto 80px;
+
   max-width:800px;
-  border-radius:30px;
-  background:linear-gradient(135deg,#fff0f5,#fff8ec);
+
+  margin:0 auto 90px;
+
+  padding:65px 25px;
+
+  text-align:center;
+
+  border-radius:32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0f5,
+      #fff8eb
+    );
+
   border:1px solid #efd8df;
-  animation:show .7s ease;
+
+  box-shadow:
+    0 20px 60px rgba(70,35,50,.07);
 }
 
 .checkout.show{
   display:block;
+
+  animation:appear .7s ease;
 }
 
-.emoji{
+.checkout-icon{
   font-size:55px;
-  margin-bottom:15px;
+
+  margin-bottom:18px;
 }
 
 .checkout h2{
   font-family:"Playfair Display",serif;
+
   font-size:48px;
-  margin-bottom:20px;
+
+  margin-bottom:22px;
 }
 
 .checkout p{
-  max-width:620px;
+  max-width:630px;
+
   margin:auto;
+
   color:#75666d;
-  line-height:1.8;
+
   font-size:17px;
+
+  line-height:1.8;
 }
 
 .highlight{
@@ -174,60 +266,152 @@ h1{
 
 .date-btn{
   margin-top:30px;
-  padding:15px 30px;
+
+  padding:15px 32px;
+
   border:0;
   border-radius:50px;
+
   background:#292126;
   color:#fff;
+
   font-weight:700;
+
   cursor:pointer;
 }
 
 .final-message{
   display:none;
+
   margin-top:30px;
+
   color:#a4516e !important;
+
   font-weight:600;
 }
 
 .final-message.show{
   display:block;
-  animation:show .5s ease;
+
+  animation:appear .6s ease;
 }
 
-@keyframes show{
+
+/* SECOND PHOTO */
+
+.second-section{
+  display:none;
+
+  max-width:780px;
+
+  margin:0 auto 90px;
+
+  text-align:center;
+}
+
+.second-section.show{
+  display:block;
+
+  animation:appear .7s ease;
+}
+
+.second-section img{
+  width:100%;
+
+  max-height:600px;
+
+  object-fit:cover;
+
+  border-radius:28px;
+
+  box-shadow:
+    0 20px 60px rgba(70,35,50,.10);
+}
+
+.second-section h2{
+  font-family:"Playfair Display",serif;
+
+  font-size:42px;
+
+  margin:25px 0 10px;
+}
+
+.second-section p{
+  color:#7d6e75;
+
+  line-height:1.7;
+}
+
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+
+  color:#9a898f;
+
+  padding:20px 0 60px;
+
+  font-size:12px;
+}
+
+
+/* ANIMATION */
+
+@keyframes appear{
+
   from{
     opacity:0;
     transform:translateY(25px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
   }
+
 }
 
+
+/* MOBILE */
+
 @media(max-width:700px){
-  .product img{
+
+  .hero{
+    padding-top:60px;
+  }
+
+  .product-image{
     height:500px;
   }
 
   .checkout h2{
     font-size:38px;
   }
+
+  .detail{
+    gap:20px;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
 <!-- HERO -->
 
 <section class="hero">
 
   <div class="eyebrow">
-    One of One · Extremely Rare
+    A very limited edition
   </div>
 
   <h1>
@@ -236,8 +420,9 @@ h1{
   </h1>
 
   <p>
-    I was supposed to order a gift for you...
-    but somehow the product page got a little too personal.
+    You said you'd order a gift for me...
+    so I thought I'd return the favour
+    and show you what I'd actually like to order.
   </p>
 
 </section>
@@ -248,57 +433,90 @@ h1{
 <section class="product">
 
   <img
-    src="https://drive.google.com/uc?export=view&id=1pwDLBt6uJrZo0rJSB0HHisuuWUEyL3OZ"
+    class="product-image"
+    src="PHOTO_PLACEHOLDER"
     alt="Something special"
   >
 
-  <div class="info">
+  <div class="product-info">
 
     <div class="badge">
-      ONLY 1 AVAILABLE
+      ONLY ONE AVAILABLE
     </div>
 
     <h2>
-      Her. ✨
+      You. ✨
     </h2>
 
     <p class="tagline">
-      Rare. Pretty. And somehow always on my mind.
+      Rare. Pretty. And slightly too easy to like.
     </p>
+
 
     <div class="details">
 
       <div class="detail">
+
         <b>Availability</b>
-        <span>Extremely rare</span>
+
+        <span class="detail-value">
+          Extremely rare
+        </span>
+
       </div>
 
-      <div class="detail">
-        <b>Smile</b>
-        <span>Dangerously cute</span>
-      </div>
 
       <div class="detail">
+
         <b>Eyes</b>
-        <span>Major distraction</span>
+
+        <span class="detail-value">
+          A little distracting
+        </span>
+
       </div>
 
+
       <div class="detail">
+
+        <b>Smile</b>
+
+        <span class="detail-value">
+          Honestly unfair
+        </span>
+
+      </div>
+
+
+      <div class="detail">
+
         <b>Personality</b>
-        <span>Worth getting to know</span>
+
+        <span class="detail-value">
+          Still discovering 😌
+        </span>
+
       </div>
 
+
       <div class="detail">
-        <b>Shipping</b>
-        <span>Only available in person 😌</span>
+
+        <b>Delivery</b>
+
+        <span class="detail-value">
+          In person only
+        </span>
+
       </div>
 
     </div>
 
+
     <button
       class="order-btn"
-      onclick="placeOrder()">
-      Order this gift 💗
+      onclick="orderGift()"
+    >
+      Add to cart 💗
     </button>
 
   </div>
@@ -306,71 +524,126 @@ h1{
 </section>
 
 
-<!-- CHECKOUT REVEAL -->
+<!-- SURPRISE -->
 
 <section
   id="checkout"
-  class="checkout">
+  class="checkout"
+>
 
-  <div class="emoji">
+  <div class="checkout-icon">
     🛒💌
   </div>
+
 
   <h2>
     Order Confirmed...
   </h2>
 
+
   <p>
 
-    Wait... there is one small problem.
+    Wait.
+
+    <br><br>
+
+    There's a tiny problem with your order.
 
     <br><br>
 
     This particular gift
     <span class="highlight">
-      can't actually be ordered.
+      isn't available for delivery.
     </span>
 
     <br><br>
 
-    Because you're not something I can put in a cart.
-    You're someone I'd actually like to know better.
+    Because you're not something
+    I want to put in a cart.
+
+    You're someone
+    <b>I actually want to spend time with.</b>
 
     <br><br>
 
-    So I think the better idea is...
+    So I have a better idea...
 
   </p>
 
+
   <button
     class="date-btn"
-    onclick="showFinal()">
-    Make it a date? ☕🍰
+    onclick="makeItADate()"
+  >
+    Upgrade the order ☕🍰
   </button>
+
 
   <p
     id="finalMessage"
-    class="final-message">
+    class="final-message"
+  >
 
-    Basque + tiramisu + good conversation.
+    Basque + cheese tiramisu.
+
     <br>
-    I'll take care of the rest. 😌
+
+    Good food, good conversation,
+    and hopefully a little trouble. 😌
+
     <br><br>
 
     <b>
-      Your move, sunshine. ❤️
+      Consider this my actual order.
+      ❤️
     </b>
 
   </p>
 
 </section>
 
+
+<!-- FINAL -->
+
+<section
+  id="finalSection"
+  class="second-section"
+>
+
+  <img
+    src="PHOTO_PLACEHOLDER"
+    alt="You"
+  >
+
+  <h2>
+    One last thing...
+  </h2>
+
+  <p>
+    I started this because I wanted to order
+    you a gift.
+
+    <br><br>
+
+    But honestly,
+    I'd rather make a memory with you. ❤️
+  </p>
+
+</section>
+
+
+<div class="footer">
+  Made with slightly questionable amounts of thoughtfulness ✨
+</div>
+
+
 </div>
 
 
 <script>
 
-function placeOrder(){
+
+function orderGift(){
 
   const checkout =
     document.getElementById("checkout");
@@ -382,24 +655,38 @@ function placeOrder(){
     block:"center"
   });
 
-  // little celebration
-  setTimeout(() => {
-    document.title = "Order Confirmed 💌";
-  }, 500);
-
 }
 
 
-function showFinal(){
+function makeItADate(){
 
   const message =
     document.getElementById("finalMessage");
 
+  const finalSection =
+    document.getElementById("finalSection");
+
+
   message.classList.add("show");
+
+
+  setTimeout(() => {
+
+    finalSection.classList.add("show");
+
+    finalSection.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  },700);
 
 }
 
+
 </script>
 
+
 </body>
+
 </html>
