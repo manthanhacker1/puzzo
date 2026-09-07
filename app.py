@@ -452,17 +452,25 @@ button:hover {{
     <div id="final" class="final hidden">
 
         <h2>
-            Okay, here's the actual order. 😌
+            One last thing…
         </h2>
 
         <p>
-            Basque + cheese tiramisu.
+            I’ll handle the rest.
+        </p>
+
+        <p>
+            You just show up. 😌❤️
         </p>
 
         <p>
             Good food, good conversation,
             <br>
-            and hopefully a little trouble.
+            and let’s see where the evening takes us.
+        </p>
+
+        <p>
+            Basque + cheese tiramisu? ☕🍰
         </p>
 
         <p>
