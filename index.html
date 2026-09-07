@@ -3,28 +3,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Special Delivery 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Something 💌</title>
 
 <style>
-@import url('https://drive.google.com/file/d/1pwDLBt6uJrZo0rJSB0HHisuuWUEyL3OZ/view?usp=sharing');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  background:#fffafc;
+  background:linear-gradient(135deg,#fff8fb,#fff,#fff7f1);
   color:#292126;
   font-family:"DM Sans",sans-serif;
 }
 
 .container{
-  width:min(1050px,92%);
+  width:min(1100px,92%);
   margin:auto;
 }
 
 .hero{
   text-align:center;
-  padding:80px 20px 55px;
+  padding:85px 20px 60px;
 }
 
 .eyebrow{
@@ -39,12 +39,15 @@ h1{
   font-family:"Playfair Display",serif;
   font-size:clamp(55px,9vw,100px);
   line-height:.95;
-  margin:18px 0;
+  margin:18px 0 25px;
 }
 
 .hero p{
   color:#81737a;
   font-size:17px;
+  line-height:1.7;
+  max-width:650px;
+  margin:auto;
 }
 
 .product{
@@ -53,71 +56,78 @@ h1{
   border-radius:30px;
   padding:15px;
   box-shadow:0 20px 60px rgba(70,35,50,.08);
-  max-width:720px;
-  margin:30px auto 80px;
+  max-width:780px;
+  margin:20px auto 80px;
 }
 
 .product img{
   width:100%;
-  height:620px;
+  height:650px;
   object-fit:cover;
   border-radius:23px;
+  display:block;
 }
 
 .info{
-  padding:28px 15px 20px;
+  padding:30px 18px 20px;
 }
 
 .badge{
   display:inline-block;
   background:#fff0f5;
   color:#a4516e;
-  padding:7px 13px;
+  padding:7px 14px;
   border-radius:30px;
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
-  margin-bottom:15px;
+  letter-spacing:1px;
 }
 
 .info h2{
   font-family:"Playfair Display",serif;
-  font-size:38px;
-  margin-bottom:8px;
+  font-size:42px;
+  margin:15px 0 5px;
 }
 
 .tagline{
   color:#806f77;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 .details{
   border-top:1px solid #eee;
   padding-top:20px;
   display:grid;
-  gap:13px;
-  color:#62555c;
+  gap:14px;
 }
 
-.details span{
+.detail{
   display:flex;
   justify-content:space-between;
+  color:#62555c;
+  font-size:14px;
 }
 
-button{
+.detail span:last-child{
+  color:#a4516e;
+  text-align:right;
+}
+
+.order-btn{
+  margin-top:30px;
   width:100%;
-  margin-top:25px;
-  padding:16px;
-  border:0;
+  padding:17px;
+  border:none;
   border-radius:50px;
   background:#292126;
-  color:white;
+  color:#fff;
   font-size:15px;
   font-weight:700;
   cursor:pointer;
   transition:.25s;
 }
 
-button:hover{
+.order-btn:hover{
   background:#a4516e;
   transform:translateY(-2px);
 }
@@ -125,49 +135,85 @@ button:hover{
 .checkout{
   display:none;
   text-align:center;
-  padding:55px 25px;
-  margin-bottom:80px;
+  padding:65px 25px;
+  margin:0 auto 80px;
+  max-width:800px;
   border-radius:30px;
   background:linear-gradient(135deg,#fff0f5,#fff8ec);
   border:1px solid #efd8df;
-  animation:show .6s ease;
+  animation:show .7s ease;
 }
 
 .checkout.show{
   display:block;
 }
 
-.checkout .emoji{
+.emoji{
   font-size:55px;
   margin-bottom:15px;
 }
 
 .checkout h2{
   font-family:"Playfair Display",serif;
-  font-size:45px;
+  font-size:48px;
   margin-bottom:20px;
 }
 
 .checkout p{
-  max-width:600px;
+  max-width:620px;
   margin:auto;
   color:#75666d;
   line-height:1.8;
+  font-size:17px;
 }
 
-.final{
-  margin-top:25px;
+.highlight{
+  color:#a4516e;
+  font-weight:700;
+}
+
+.date-btn{
+  margin-top:30px;
+  padding:15px 30px;
+  border:0;
+  border-radius:50px;
+  background:#292126;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.final-message{
+  display:none;
+  margin-top:30px;
   color:#a4516e !important;
   font-weight:600;
 }
 
+.final-message.show{
+  display:block;
+  animation:show .5s ease;
+}
+
 @keyframes show{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 @media(max-width:700px){
-  .product img{height:500px}
+  .product img{
+    height:500px;
+  }
+
+  .checkout h2{
+    font-size:38px;
+  }
 }
 </style>
 </head>
@@ -176,61 +222,83 @@ button:hover{
 
 <div class="container">
 
+<!-- HERO -->
+
 <section class="hero">
 
-  <div class="eyebrow">Limited Edition · One of One</div>
+  <div class="eyebrow">
+    One of One · Extremely Rare
+  </div>
 
-  <h1>Something<br>Worth Ordering 💌</h1>
+  <h1>
+    A Little<br>
+    Something 💌
+  </h1>
 
   <p>
-    I was looking for something special to order...
-    then I realized I already knew what I wanted.
+    I was supposed to order a gift for you...
+    but somehow the product page got a little too personal.
   </p>
 
 </section>
 
 
+<!-- PRODUCT -->
+
 <section class="product">
 
-  <!-- Change photo_1.jpeg to any of her photos -->
-  <img src="assets/photo_1.jpeg">
+  <img
+    src="https://drive.google.com/uc?export=view&id=1pwDLBt6uJrZo0rJSB0HHisuuWUEyL3OZ"
+    alt="Something special"
+  >
 
   <div class="info">
 
-    <div class="badge">ONLY 1 AVAILABLE</div>
+    <div class="badge">
+      ONLY 1 AVAILABLE
+    </div>
 
-    <h2>Her. ✨</h2>
+    <h2>
+      Her. ✨
+    </h2>
 
     <p class="tagline">
-      Rare. Pretty. Slightly distracting.
+      Rare. Pretty. And somehow always on my mind.
     </p>
 
     <div class="details">
 
-      <span>
+      <div class="detail">
         <b>Availability</b>
         <span>Extremely rare</span>
-      </span>
+      </div>
 
-      <span>
-        <b>Personality</b>
-        <span>Worth getting to know</span>
-      </span>
-
-      <span>
+      <div class="detail">
         <b>Smile</b>
         <span>Dangerously cute</span>
-      </span>
+      </div>
 
-      <span>
+      <div class="detail">
+        <b>Eyes</b>
+        <span>Major distraction</span>
+      </div>
+
+      <div class="detail">
+        <b>Personality</b>
+        <span>Worth getting to know</span>
+      </div>
+
+      <div class="detail">
         <b>Shipping</b>
-        <span>Unfortunately unavailable 😭</span>
-      </span>
+        <span>Only available in person 😌</span>
+      </div>
 
     </div>
 
-    <button onclick="orderHer()">
-      Add to cart 💗
+    <button
+      class="order-btn"
+      onclick="placeOrder()">
+      Order this gift 💗
     </button>
 
   </div>
@@ -238,47 +306,61 @@ button:hover{
 </section>
 
 
-<section id="checkout" class="checkout">
+<!-- CHECKOUT REVEAL -->
 
-  <div class="emoji">🛒💌</div>
+<section
+  id="checkout"
+  class="checkout">
 
-  <h2>Order Confirmed...</h2>
+  <div class="emoji">
+    🛒💌
+  </div>
+
+  <h2>
+    Order Confirmed...
+  </h2>
 
   <p>
-    Wait... this product isn't actually available for delivery.
+
+    Wait... there is one small problem.
+
     <br><br>
 
-    <b>Because you can't order someone who should be choosing
-    you back. :)</b>
+    This particular gift
+    <span class="highlight">
+      can't actually be ordered.
+    </span>
+
+    <br><br>
+
+    Because you're not something I can put in a cart.
+    You're someone I'd actually like to know better.
+
+    <br><br>
+
+    So I think the better idea is...
+
   </p>
 
-  <p class="final">
-    So instead of adding you to my cart,
-    how about I take you out for that tiramisu? 😌
-  </p>
-
-  <button onclick="accept()">
-    Okay, that's actually cute 👀
+  <button
+    class="date-btn"
+    onclick="showFinal()">
+    Make it a date? ☕🍰
   </button>
 
-</section>
+  <p
+    id="finalMessage"
+    class="final-message">
 
-
-<section id="accepted" class="checkout">
-
-  <div class="emoji">🥹💗</div>
-
-  <h2>Best decision.</h2>
-
-  <p>
-    Your order has been upgraded from
-    <b>"cute idea"</b> to
-    <b>"actual date."</b>
+    Basque + tiramisu + good conversation.
+    <br>
+    I'll take care of the rest. 😌
     <br><br>
 
-    Basque + tiramisu + good company.
-    <br>
-    I'll take care of the rest. :)
+    <b>
+      Your move, sunshine. ❤️
+    </b>
+
   </p>
 
 </section>
@@ -288,7 +370,7 @@ button:hover{
 
 <script>
 
-function orderHer(){
+function placeOrder(){
 
   const checkout =
     document.getElementById("checkout");
@@ -296,22 +378,24 @@ function orderHer(){
   checkout.classList.add("show");
 
   checkout.scrollIntoView({
-    behavior:"smooth"
+    behavior:"smooth",
+    block:"center"
   });
+
+  // little celebration
+  setTimeout(() => {
+    document.title = "Order Confirmed 💌";
+  }, 500);
 
 }
 
 
-function accept(){
+function showFinal(){
 
-  const accepted =
-    document.getElementById("accepted");
+  const message =
+    document.getElementById("finalMessage");
 
-  accepted.classList.add("show");
-
-  accepted.scrollIntoView({
-    behavior:"smooth"
-  });
+  message.classList.add("show");
 
 }
 
