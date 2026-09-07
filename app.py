@@ -8,9 +8,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Google Drive image
+# Direct Google Drive image download/display URL
 PHOTO_URL = (
-    "https://ibb.co/8gNLLb52"
+    "https://lh3.googleusercontent.com/d/1pwDLBt6uJrZo0rJSB0HHisuuWUEyL3OZ"
 )
 
 html = f"""
@@ -338,6 +338,7 @@ button:hover {{
             <img
                 src="{PHOTO_URL}"
                 alt="Something special"
+                referrerpolicy="no-referrer"
             >
 
             <div class="badge">
