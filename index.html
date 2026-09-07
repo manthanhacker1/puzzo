@@ -2,510 +2,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Something ✨</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Special Delivery 💌</title>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      background: linear-gradient(135deg, #fff8fb, #fff, #fff7f1);
-      color: #2b2026;
-      font-family: "DM Sans", sans-serif;
-    }
+body{
+  background:#fffafc;
+  color:#292126;
+  font-family:"DM Sans",sans-serif;
+}
 
-    .hero {
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 20px;
-    }
+.container{
+  width:min(1050px,92%);
+  margin:auto;
+}
 
-    .hero-content {
-      max-width: 800px;
-    }
+.hero{
+  text-align:center;
+  padding:80px 20px 55px;
+}
 
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 12px;
-      color: #a36b7d;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
+.eyebrow{
+  color:#ad7185;
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:700;
+}
 
-    h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(55px, 9vw, 105px);
-      line-height: .95;
-      font-weight: 500;
-      margin-bottom: 25px;
-    }
+h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(55px,9vw,100px);
+  line-height:.95;
+  margin:18px 0;
+}
 
-    .hero p {
-      color: #776870;
-      font-size: 18px;
-      line-height: 1.7;
-    }
+.hero p{
+  color:#81737a;
+  font-size:17px;
+}
 
-    .container {
-      width: min(1100px, 92%);
-      margin: auto;
-    }
+.product{
+  background:white;
+  border:1px solid #f0dfe5;
+  border-radius:30px;
+  padding:15px;
+  box-shadow:0 20px 60px rgba(70,35,50,.08);
+  max-width:720px;
+  margin:30px auto 80px;
+}
 
-    .section {
-      padding: 70px 0;
-    }
+.product img{
+  width:100%;
+  height:620px;
+  object-fit:cover;
+  border-radius:23px;
+}
 
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 42px;
-      margin-bottom: 35px;
-    }
+.info{
+  padding:28px 15px 20px;
+}
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
+.badge{
+  display:inline-block;
+  background:#fff0f5;
+  color:#a4516e;
+  padding:7px 13px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:15px;
+}
 
-    .photo-card {
-      background: white;
-      padding: 10px;
-      border-radius: 25px;
-      box-shadow: 0 15px 45px rgba(70, 35, 50, .08);
-      transition: .3s;
-    }
+.info h2{
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  margin-bottom:8px;
+}
 
-    .photo-card:hover {
-      transform: translateY(-8px) rotate(.5deg);
-    }
+.tagline{
+  color:#806f77;
+  margin-bottom:20px;
+}
 
-    .photo-card img {
-      width: 100%;
-      height: 390px;
-      object-fit: cover;
-      border-radius: 18px;
-    }
+.details{
+  border-top:1px solid #eee;
+  padding-top:20px;
+  display:grid;
+  gap:13px;
+  color:#62555c;
+}
 
-    .photo-card h3 {
-      padding: 16px 10px 5px;
-      font-size: 17px;
-    }
+.details span{
+  display:flex;
+  justify-content:space-between;
+}
 
-    .photo-card p {
-      padding: 0 10px 15px;
-      color: #87777e;
-      font-size: 14px;
-    }
+button{
+  width:100%;
+  margin-top:25px;
+  padding:16px;
+  border:0;
+  border-radius:50px;
+  background:#292126;
+  color:white;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-    }
+button:hover{
+  background:#a4516e;
+  transform:translateY(-2px);
+}
 
-    .product {
-      background: rgba(255,255,255,.9);
-      border: 1px solid #f0dfe5;
-      padding: 30px;
-      border-radius: 25px;
-      transition: .3s;
-    }
+.checkout{
+  display:none;
+  text-align:center;
+  padding:55px 25px;
+  margin-bottom:80px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#fff0f5,#fff8ec);
+  border:1px solid #efd8df;
+  animation:show .6s ease;
+}
 
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(70,35,50,.08);
-    }
+.checkout.show{
+  display:block;
+}
 
-    .emoji {
-      font-size: 35px;
-      margin-bottom: 15px;
-    }
+.checkout .emoji{
+  font-size:55px;
+  margin-bottom:15px;
+}
 
-    .product h3 {
-      font-size: 23px;
-      margin-bottom: 10px;
-    }
+.checkout h2{
+  font-family:"Playfair Display",serif;
+  font-size:45px;
+  margin-bottom:20px;
+}
 
-    .product p {
-      color: #817179;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
+.checkout p{
+  max-width:600px;
+  margin:auto;
+  color:#75666d;
+  line-height:1.8;
+}
 
-    .price {
-      color: #a34f6d;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
+.final{
+  margin-top:25px;
+  color:#a4516e !important;
+  font-weight:600;
+}
 
-    button {
-      border: none;
-      background: #2b2026;
-      color: white;
-      padding: 13px 22px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: .2s;
-    }
+@keyframes show{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-    button:hover {
-      transform: scale(1.04);
-      background: #a34f6d;
-    }
-
-    .cart {
-      background: white;
-      border: 1px solid #f0dfe5;
-      border-radius: 25px;
-      padding: 30px;
-      margin-bottom: 70px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 0;
-      border-bottom: 1px solid #eee;
-    }
-
-    .checkout {
-      width: 100%;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-
-    .surprise {
-      display: none;
-      text-align: center;
-      padding: 60px 25px;
-      background: linear-gradient(135deg, #fff0f5, #fff9ed);
-      border: 1px solid #efd8df;
-      border-radius: 30px;
-      margin-bottom: 80px;
-    }
-
-    .surprise.show {
-      display: block;
-      animation: appear .7s ease;
-    }
-
-    .surprise .heart {
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
-
-    .surprise h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 45px;
-      margin-bottom: 20px;
-    }
-
-    .surprise p {
-      max-width: 600px;
-      margin: auto;
-      color: #75656d;
-      line-height: 1.8;
-      font-size: 17px;
-    }
-
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media(max-width: 750px) {
-      .gallery,
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .photo-card img {
-        height: 450px;
-      }
-    }
-  </style>
+@media(max-width:700px){
+  .product img{height:500px}
+}
+</style>
 </head>
 
 <body>
 
-<section class="hero">
-  <div class="hero-content">
-    <div class="eyebrow">A tiny store for someone special</div>
-
-    <h1>
-      A Little<br>
-      Something ✨
-    </h1>
-
-    <p>
-      You said you'd order something for me...
-      so I thought I'd make your job slightly more interesting.
-    </p>
-  </div>
-</section>
-
 <div class="container">
 
-  <section class="section">
-    <div class="section-title">Things I noticed about you</div>
+<section class="hero">
 
-    <div class="gallery">
+  <div class="eyebrow">Limited Edition · One of One</div>
 
-      <div class="photo-card">
-        <img src="assets/photo_1.jpeg">
-        <h3>The effortlessly cute one</h3>
-        <p>Somehow even bowling looks unfairly good on you.</p>
-      </div>
+  <h1>Something<br>Worth Ordering 💌</h1>
 
-      <div class="photo-card">
-        <img src="assets/photo_2.jpeg">
-        <h3>The desi one</h3>
-        <p>This look has absolutely no business being this pretty.</p>
-      </div>
+  <p>
+    I was looking for something special to order...
+    then I realized I already knew what I wanted.
+  </p>
 
-      <div class="photo-card">
-        <img src="assets/photo_3.jpeg">
-        <h3>The “I wasn't posing” one</h3>
-        <p>Yeah... I'm not buying that. 😌</p>
-      </div>
-
-    </div>
-  </section>
+</section>
 
 
-  <section class="section">
+<section class="product">
 
-    <div class="section-title">
-      Pick something nice
-    </div>
+  <!-- Change photo_1.jpeg to any of her photos -->
+  <img src="assets/photo_1.jpeg">
 
-    <div class="products">
+  <div class="info">
 
-      <div class="product">
-        <div class="emoji">🍰</div>
-        <h3>Cheese Tiramisu</h3>
-        <p>
-          Because apparently this is one of the ways to win you over.
-        </p>
-        <div class="price">₹399</div>
-        <button onclick="addToCart('Cheese Tiramisu',399)">
-          Add to cart
-        </button>
-      </div>
+    <div class="badge">ONLY 1 AVAILABLE</div>
 
-      <div class="product">
-        <div class="emoji">🎁</div>
-        <h3>A Little Sweet Surprise</h3>
-        <p>
-          Something cute. You don't get to know what yet.
-        </p>
-        <div class="price">₹599</div>
-        <button onclick="addToCart('A Little Sweet Surprise',599)">
-          Add to cart
-        </button>
-      </div>
+    <h2>Her. ✨</h2>
 
-      <div class="product">
-        <div class="emoji">☕</div>
-        <h3>Coffee + Dessert</h3>
-        <p>
-          Technically not a product... but possibly the better option.
-        </p>
-        <div class="price">₹799</div>
-        <button onclick="addToCart('Coffee + Dessert',799)">
-          Add to cart
-        </button>
-      </div>
-
-      <div class="product">
-        <div class="emoji">💌</div>
-        <h3>Mystery Box</h3>
-        <p>
-          For when choosing is overrated.
-        </p>
-        <div class="price">₹999</div>
-        <button onclick="addToCart('Mystery Box',999)">
-          Add to cart
-        </button>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="cart">
-
-    <h2>🛒 Your Cart</h2>
-
-    <div id="cartItems">
-      <p style="margin-top:20px;color:#88777f;">
-        Nothing here yet. Take your time 😂
-      </p>
-    </div>
-
-    <h3 id="total" style="margin-top:20px;"></h3>
-
-    <button
-      class="checkout"
-      onclick="checkout()">
-      Checkout ✨
-    </button>
-
-  </section>
-
-
-  <section id="surprise" class="surprise">
-
-    <div class="heart">💌</div>
-
-    <h2>Okay... plot twist.</h2>
-
-    <p>
-      The order was never really the point.
-      <br><br>
-
-      I just wanted an excuse to tell you that
-      <b>I really like talking to you.</b>
-      <br><br>
-
-      And honestly, I'd rather replace this checkout
-      with an actual coffee + dessert plan sometime.
-      <br><br>
-
-      No pressure. I just thought you should know. :)
+    <p class="tagline">
+      Rare. Pretty. Slightly distracting.
     </p>
 
-  </section>
+    <div class="details">
+
+      <span>
+        <b>Availability</b>
+        <span>Extremely rare</span>
+      </span>
+
+      <span>
+        <b>Personality</b>
+        <span>Worth getting to know</span>
+      </span>
+
+      <span>
+        <b>Smile</b>
+        <span>Dangerously cute</span>
+      </span>
+
+      <span>
+        <b>Shipping</b>
+        <span>Unfortunately unavailable 😭</span>
+      </span>
+
+    </div>
+
+    <button onclick="orderHer()">
+      Add to cart 💗
+    </button>
+
+  </div>
+
+</section>
+
+
+<section id="checkout" class="checkout">
+
+  <div class="emoji">🛒💌</div>
+
+  <h2>Order Confirmed...</h2>
+
+  <p>
+    Wait... this product isn't actually available for delivery.
+    <br><br>
+
+    <b>Because you can't order someone who should be choosing
+    you back. :)</b>
+  </p>
+
+  <p class="final">
+    So instead of adding you to my cart,
+    how about I take you out for that tiramisu? 😌
+  </p>
+
+  <button onclick="accept()">
+    Okay, that's actually cute 👀
+  </button>
+
+</section>
+
+
+<section id="accepted" class="checkout">
+
+  <div class="emoji">🥹💗</div>
+
+  <h2>Best decision.</h2>
+
+  <p>
+    Your order has been upgraded from
+    <b>"cute idea"</b> to
+    <b>"actual date."</b>
+    <br><br>
+
+    Basque + tiramisu + good company.
+    <br>
+    I'll take care of the rest. :)
+  </p>
+
+</section>
 
 </div>
 
 
 <script>
 
-let cart = [];
+function orderHer(){
 
-function addToCart(name, price) {
+  const checkout =
+    document.getElementById("checkout");
 
-  cart.push({
-    name: name,
-    price: price
+  checkout.classList.add("show");
+
+  checkout.scrollIntoView({
+    behavior:"smooth"
   });
-
-  renderCart();
-
-}
-
-function renderCart() {
-
-  const container = document.getElementById("cartItems");
-  const totalElement = document.getElementById("total");
-
-  if(cart.length === 0) {
-
-    container.innerHTML =
-      `<p style="margin-top:20px;color:#88777f;">
-        Nothing here yet. Take your time 😂
-      </p>`;
-
-    totalElement.innerHTML = "";
-
-    return;
-  }
-
-  let total = 0;
-
-  container.innerHTML = "";
-
-  cart.forEach((item, index) => {
-
-    total += item.price;
-
-    const row = document.createElement("div");
-
-    row.className = "cart-item";
-
-    row.innerHTML = `
-      <span>
-        ${item.name}
-      </span>
-
-      <span>
-        ₹${item.price}
-        <button
-          style="padding:5px 10px;margin-left:10px;"
-          onclick="removeItem(${index})">
-          ×
-        </button>
-      </span>
-    `;
-
-    container.appendChild(row);
-
-  });
-
-  totalElement.innerHTML = "Total: ₹" + total;
 
 }
 
 
-function removeItem(index) {
+function accept(){
 
-  cart.splice(index,1);
+  const accepted =
+    document.getElementById("accepted");
 
-  renderCart();
+  accepted.classList.add("show");
 
-}
-
-
-function checkout() {
-
-  if(cart.length === 0) {
-
-    alert("You haven't picked anything yet 😭");
-
-    return;
-
-  }
-
-  const surprise =
-    document.getElementById("surprise");
-
-  surprise.classList.add("show");
-
-  surprise.scrollIntoView({
-    behavior: "smooth"
+  accepted.scrollIntoView({
+    behavior:"smooth"
   });
-
-  document.body.animate(
-    [
-      { transform:"scale(1)" },
-      { transform:"scale(1.01)" },
-      { transform:"scale(1)" }
-    ],
-    {
-      duration:500
-    }
-  );
 
 }
 
