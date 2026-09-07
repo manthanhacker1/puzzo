@@ -1,857 +1,513 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Tanvi ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Something ✨</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #08070c;
-    color: white;
-    overflow-x: hidden;
-}
-
-/* ---------- BACKGROUND ---------- */
-
-.background {
-    position: fixed;
-    inset: 0;
-    z-index: -10;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(255, 65, 120, .18), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(165, 70, 255, .16), transparent 30%),
-        #08070c;
-}
-
-.noise {
-    position: fixed;
-    inset: 0;
-    z-index: -5;
-    pointer-events: none;
-    opacity: .035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-}
-
-canvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* ---------- HERO ---------- */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 30px;
-    position: relative;
-}
-
-.hero-content {
-    max-width: 850px;
-}
-
-.small {
-    color: #ff8eb3;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-size: 12px;
-    margin-bottom: 25px;
-    animation: fadeUp 1s ease forwards;
-}
-
-h1 {
-    font-size: clamp(55px, 11vw, 130px);
-    line-height: .9;
-    letter-spacing: -7px;
-    margin-bottom: 35px;
-    background: linear-gradient(
-        120deg,
-        #fff,
-        #ff9fbd,
-        #ff477e,
-        #c77dff,
-        #fff
-    );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient 6s ease infinite, fadeUp 1s ease forwards;
-}
-
-.hero p {
-    color: #bdb8c6;
-    font-size: 18px;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: auto;
-}
-
-.scroll {
-    position: absolute;
-    bottom: 30px;
-    font-size: 11px;
-    color: #77727f;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    animation: bounce 2s infinite;
-}
-
-/* ---------- SECTIONS ---------- */
-
-section {
-    min-height: 100vh;
-    padding: 100px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    width: 100%;
-    max-width: 900px;
-}
-
-.section-label {
-    color: #ff719b;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 11px;
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: clamp(35px, 7vw, 75px);
-    line-height: 1;
-    margin-bottom: 35px;
-    letter-spacing: -3px;
-}
-
-/* ---------- CARD ---------- */
-
-.card {
-    background: rgba(255,255,255,.045);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 30px;
-    padding: 45px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 30px 100px rgba(0,0,0,.4);
-}
-
-.card p {
-    color: #c5c0cb;
-    line-height: 2;
-    font-size: 17px;
-    margin-bottom: 20px;
-}
-
-.signature {
-    color: #ff8cac !important;
-    font-size: 20px !important;
-    margin-top: 35px;
-}
-
-/* ---------- INTERACTIVE ---------- */
-
-.question {
-    text-align: center;
-}
-
-.question h2 {
-    font-size: clamp(35px, 7vw, 70px);
-    margin-bottom: 20px;
-}
-
-.question p {
-    color: #aaa5b0;
-    margin-bottom: 35px;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    padding: 16px 30px;
-    border-radius: 999px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: .3s;
-}
-
-.yes {
-    color: white;
-    background: linear-gradient(135deg, #ff477e, #b24cff);
-    box-shadow: 0 10px 40px rgba(255,71,126,.25);
-}
-
-.yes:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 15px 50px rgba(255,71,126,.4);
-}
-
-.no {
-    background: #19171e;
-    color: #aaa;
-    margin-left: 10px;
-    position: relative;
-}
-
-/* ---------- SECRET ---------- */
-
-.secret {
-    display: none;
-    margin-top: 35px;
-    padding: 35px;
-    border-radius: 25px;
-    background: rgba(255, 70, 125, .08);
-    border: 1px solid rgba(255, 100, 150, .15);
-    animation: pop .5s ease;
-}
-
-.secret.show {
-    display: block;
-}
-
-.secret span {
-    font-size: 50px;
-    display: block;
-    margin-bottom: 15px;
-}
-
-/* ---------- MEMORY ---------- */
-
-.memories {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.memory {
-    min-height: 180px;
-    padding: 25px;
-    border-radius: 25px;
-    background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.07),
-        rgba(255,255,255,.025)
-    );
-    border: 1px solid rgba(255,255,255,.08);
-    display: flex;
-    align-items: end;
-    transition: .4s;
-}
-
-.memory:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255,100,150,.4);
-}
-
-.memory h3 {
-    font-size: 17px;
-}
-
-.memory p {
-    color: #99939f;
-    font-size: 12px;
-    margin-top: 7px;
-}
-
-/* ---------- FINAL ---------- */
-
-.final {
-    text-align: center;
-    min-height: 100vh;
-}
-
-.heart {
-    font-size: 90px;
-    animation: heartbeat 1.4s infinite;
-    margin-bottom: 25px;
-}
-
-.final h2 {
-    font-size: clamp(40px, 8vw, 85px);
-    letter-spacing: -4px;
-}
-
-.final p {
-    color: #aaa5b0;
-    max-width: 550px;
-    margin: 25px auto 40px;
-    line-height: 1.8;
-}
-
-/* ---------- FOOTER ---------- */
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #55515b;
-    font-size: 12px;
-}
-
-/* ---------- ANIMATIONS ---------- */
-
-@keyframes gradient {
-    0% { background-position: 0%; }
-    50% { background-position: 100%; }
-    100% { background-position: 0%; }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    to {
+
+    body {
+      background: linear-gradient(135deg, #fff8fb, #fff, #fff7f1);
+      color: #2b2026;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 12px;
+      color: #a36b7d;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(55px, 9vw, 105px);
+      line-height: .95;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      color: #776870;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 42px;
+      margin-bottom: 35px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .photo-card {
+      background: white;
+      padding: 10px;
+      border-radius: 25px;
+      box-shadow: 0 15px 45px rgba(70, 35, 50, .08);
+      transition: .3s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px) rotate(.5deg);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .photo-card h3 {
+      padding: 16px 10px 5px;
+      font-size: 17px;
+    }
+
+    .photo-card p {
+      padding: 0 10px 15px;
+      color: #87777e;
+      font-size: 14px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .product {
+      background: rgba(255,255,255,.9);
+      border: 1px solid #f0dfe5;
+      padding: 30px;
+      border-radius: 25px;
+      transition: .3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(70,35,50,.08);
+    }
+
+    .emoji {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .product h3 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .product p {
+      color: #817179;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      color: #a34f6d;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      background: #2b2026;
+      color: white;
+      padding: 13px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    button:hover {
+      transform: scale(1.04);
+      background: #a34f6d;
+    }
+
+    .cart {
+      background: white;
+      border: 1px solid #f0dfe5;
+      border-radius: 25px;
+      padding: 30px;
+      margin-bottom: 70px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .checkout {
+      width: 100%;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .surprise {
+      display: none;
+      text-align: center;
+      padding: 60px 25px;
+      background: linear-gradient(135deg, #fff0f5, #fff9ed);
+      border: 1px solid #efd8df;
+      border-radius: 30px;
+      margin-bottom: 80px;
+    }
+
+    .surprise.show {
+      display: block;
+      animation: appear .7s ease;
+    }
+
+    .surprise .heart {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .surprise h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 45px;
+      margin-bottom: 20px;
+    }
+
+    .surprise p {
+      max-width: 600px;
+      margin: auto;
+      color: #75656d;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
         opacity: 1;
         transform: translateY(0);
+      }
     }
-}
 
-@keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-}
-
-@keyframes heartbeat {
-    0%,100% { transform: scale(1); }
-    20% { transform: scale(1.12); }
-    40% { transform: scale(1); }
-}
-
-@keyframes pop {
-    from {
-        opacity: 0;
-        transform: scale(.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@media(max-width:700px) {
-    .memories {
+    @media(max-width: 750px) {
+      .gallery,
+      .products {
         grid-template-columns: 1fr;
-    }
+      }
 
-    .card {
-        padding: 28px;
+      .photo-card img {
+        height: 450px;
+      }
     }
-
-    .no {
-        margin-left: 0;
-        margin-top: 12px;
-    }
-}
-</style>
+  </style>
 </head>
 
 <body>
 
-<div class="background"></div>
-<div class="noise"></div>
-<canvas id="particles"></canvas>
-
-<!-- HERO -->
-
 <section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">A tiny store for someone special</div>
 
-    <div class="hero-content">
+    <h1>
+      A Little<br>
+      Something ✨
+    </h1>
 
-        <div class="small">
-            A message from Manthan
-        </div>
+    <p>
+      You said you'd order something for me...
+      so I thought I'd make your job slightly more interesting.
+    </p>
+  </div>
+</section>
 
-        <h1>
-            Tanvi,<br>
-            I'm Sorry.
-        </h1>
+<div class="container">
 
+  <section class="section">
+    <div class="section-title">Things I noticed about you</div>
+
+    <div class="gallery">
+
+      <div class="photo-card">
+        <img src="assets/photo_1.jpeg">
+        <h3>The effortlessly cute one</h3>
+        <p>Somehow even bowling looks unfairly good on you.</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="assets/photo_2.jpeg">
+        <h3>The desi one</h3>
+        <p>This look has absolutely no business being this pretty.</p>
+      </div>
+
+      <div class="photo-card">
+        <img src="assets/photo_3.jpeg">
+        <h3>The “I wasn't posing” one</h3>
+        <p>Yeah... I'm not buying that. 😌</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      Pick something nice
+    </div>
+
+    <div class="products">
+
+      <div class="product">
+        <div class="emoji">🍰</div>
+        <h3>Cheese Tiramisu</h3>
         <p>
-            I could have written a normal apology...
-            but you deserve something a little more memorable.
+          Because apparently this is one of the ways to win you over.
         </p>
+        <div class="price">₹399</div>
+        <button onclick="addToCart('Cheese Tiramisu',399)">
+          Add to cart
+        </button>
+      </div>
 
-    </div>
-
-    <div class="scroll">
-        ↓ keep scrolling
-    </div>
-
-</section>
-
-
-<!-- LETTER -->
-
-<section>
-
-    <div class="container">
-
-        <div class="section-label">
-            Chapter 01
-        </div>
-
-        <h2 class="section-title">
-            No excuses.<br>
-            Just honesty.
-        </h2>
-
-        <div class="card">
-
-            <p>
-                Tanvi, I know saying "sorry" doesn't magically
-                undo anything. And honestly, I don't want to hide
-                behind excuses or explanations.
-            </p>
-
-            <p>
-                If something I said or did hurt you,
-                I'm genuinely sorry.
-            </p>
-
-            <p>
-                You didn't deserve to feel bad because of me.
-                I should have handled things better, and I take
-                responsibility for that.
-            </p>
-
-            <p>
-                I'm not asking you to forget what happened.
-                I'm only asking you to believe that the apology
-                is real.
-            </p>
-
-            <p class="signature">
-                — Manthan ❤️
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- MEMORIES -->
-
-<section>
-
-    <div class="container">
-
-        <div class="section-label">
-            Chapter 02
-        </div>
-
-        <h2 class="section-title">
-            Things worth<br>
-            remembering.
-        </h2>
-
-        <div class="memories">
-
-            <div class="memory">
-                <div>
-                    <h3>01 — Your Smile</h3>
-                    <p>
-                        Somehow it makes everything
-                        feel a little less complicated.
-                    </p>
-                </div>
-            </div>
-
-            <div class="memory">
-                <div>
-                    <h3>02 — Your Vibe</h3>
-                    <p>
-                        Completely your own.
-                        And honestly, that's rare.
-                    </p>
-                </div>
-            </div>
-
-            <div class="memory">
-                <div>
-                    <h3>03 — You</h3>
-                    <p>
-                        The person this entire website
-                        was ridiculously made for.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- INTERACTIVE QUESTION -->
-
-<section>
-
-    <div class="container question">
-
-        <div class="section-label">
-            Chapter 03
-        </div>
-
-        <h2>
-            Can I get<br>
-            one tiny chance?
-        </h2>
-
+      <div class="product">
+        <div class="emoji">🎁</div>
+        <h3>A Little Sweet Surprise</h3>
         <p>
-            Not to erase everything.<br>
-            Just to make things right.
+          Something cute. You don't get to know what yet.
         </p>
-
-        <button class="yes" onclick="forgive()">
-            Okay, maybe ❤️
+        <div class="price">₹599</div>
+        <button onclick="addToCart('A Little Sweet Surprise',599)">
+          Add to cart
         </button>
+      </div>
 
-        <button class="no" id="noBtn">
-            Nope 😶
-        </button>
-
-        <div class="secret" id="secret">
-
-            <span>🥹❤️</span>
-
-            <h3>
-                I promise I'll make it worth it.
-            </h3>
-
-            <p>
-                And yes, I know that was suspiciously
-                easy to click.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FINAL -->
-
-<section class="final">
-
-    <div>
-
-        <div class="heart">
-            ❤️
-        </div>
-
-        <h2>
-            One last thing.
-        </h2>
-
+      <div class="product">
+        <div class="emoji">☕</div>
+        <h3>Coffee + Dessert</h3>
         <p>
-            Whatever you decide, I genuinely hope
-            you're happy. But if there's even a tiny
-            part of you willing to give me another chance...
+          Technically not a product... but possibly the better option.
         </p>
-
-        <button class="yes" onclick="celebrate()">
-            Let's start again ✨
+        <div class="price">₹799</div>
+        <button onclick="addToCart('Coffee + Dessert',799)">
+          Add to cart
         </button>
+      </div>
+
+      <div class="product">
+        <div class="emoji">💌</div>
+        <h3>Mystery Box</h3>
+        <p>
+          For when choosing is overrated.
+        </p>
+        <div class="price">₹999</div>
+        <button onclick="addToCart('Mystery Box',999)">
+          Add to cart
+        </button>
+      </div>
 
     </div>
 
-</section>
+  </section>
 
 
-<footer>
-    Made with too much overthinking by Manthan ❤️
-</footer>
+  <section class="cart">
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems">
+      <p style="margin-top:20px;color:#88777f;">
+        Nothing here yet. Take your time 😂
+      </p>
+    </div>
+
+    <h3 id="total" style="margin-top:20px;"></h3>
+
+    <button
+      class="checkout"
+      onclick="checkout()">
+      Checkout ✨
+    </button>
+
+  </section>
+
+
+  <section id="surprise" class="surprise">
+
+    <div class="heart">💌</div>
+
+    <h2>Okay... plot twist.</h2>
+
+    <p>
+      The order was never really the point.
+      <br><br>
+
+      I just wanted an excuse to tell you that
+      <b>I really like talking to you.</b>
+      <br><br>
+
+      And honestly, I'd rather replace this checkout
+      with an actual coffee + dessert plan sometime.
+      <br><br>
+
+      No pressure. I just thought you should know. :)
+    </p>
+
+  </section>
+
+</div>
 
 
 <script>
 
-/* =========================
-   NO BUTTON ESCAPE
-========================= */
+let cart = [];
 
-const noBtn = document.getElementById("noBtn");
+function addToCart(name, price) {
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
+  cart.push({
+    name: name,
+    price: price
+  });
 
-function moveButton() {
-
-    const padding = 30;
-
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-    const x = Math.max(
-        padding,
-        Math.random() * maxX
-    );
-
-    const y = Math.max(
-        padding,
-        Math.random() * maxY
-    );
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-}
-
-
-/* =========================
-   FORGIVENESS
-========================= */
-
-function forgive() {
-
-    document
-        .getElementById("secret")
-        .classList.add("show");
-
-    createHearts();
+  renderCart();
 
 }
 
+function renderCart() {
 
-/* =========================
-   CELEBRATION
-========================= */
+  const container = document.getElementById("cartItems");
+  const totalElement = document.getElementById("total");
 
-function celebrate() {
+  if(cart.length === 0) {
 
-    for(let i = 0; i < 80; i++) {
+    container.innerHTML =
+      `<p style="margin-top:20px;color:#88777f;">
+        Nothing here yet. Take your time 😂
+      </p>`;
 
-        setTimeout(() => {
+    totalElement.innerHTML = "";
 
-            const heart = document.createElement("div");
+    return;
+  }
 
-            heart.innerHTML =
-                ["❤️","💗","💖","💕","✨"][Math.floor(Math.random()*5)];
+  let total = 0;
 
-            heart.style.position = "fixed";
-            heart.style.left = Math.random()*100 + "vw";
-            heart.style.top = "-20px";
-            heart.style.fontSize =
-                (15 + Math.random()*30) + "px";
+  container.innerHTML = "";
 
-            heart.style.zIndex = "9999";
-            heart.style.pointerEvents = "none";
+  cart.forEach((item, index) => {
 
-            document.body.appendChild(heart);
+    total += item.price;
 
-            const duration =
-                2000 + Math.random()*2500;
+    const row = document.createElement("div");
 
-            heart.animate(
-                [
-                    {
-                        transform: "translateY(0) rotate(0deg)",
-                        opacity: 1
-                    },
-                    {
-                        transform:
-                            `translateY(${window.innerHeight + 100}px)
-                             rotate(${Math.random()*720}deg)`,
-                        opacity: 0
-                    }
-                ],
-                {
-                    duration: duration,
-                    easing: "cubic-bezier(.2,.8,.3,1)"
-                }
-            );
+    row.className = "cart-item";
 
-            setTimeout(() => heart.remove(), duration);
+    row.innerHTML = `
+      <span>
+        ${item.name}
+      </span>
 
-        }, i * 20);
+      <span>
+        ₹${item.price}
+        <button
+          style="padding:5px 10px;margin-left:10px;"
+          onclick="removeItem(${index})">
+          ×
+        </button>
+      </span>
+    `;
+
+    container.appendChild(row);
+
+  });
+
+  totalElement.innerHTML = "Total: ₹" + total;
+
+}
+
+
+function removeItem(index) {
+
+  cart.splice(index,1);
+
+  renderCart();
+
+}
+
+
+function checkout() {
+
+  if(cart.length === 0) {
+
+    alert("You haven't picked anything yet 😭");
+
+    return;
+
+  }
+
+  const surprise =
+    document.getElementById("surprise");
+
+  surprise.classList.add("show");
+
+  surprise.scrollIntoView({
+    behavior: "smooth"
+  });
+
+  document.body.animate(
+    [
+      { transform:"scale(1)" },
+      { transform:"scale(1.01)" },
+      { transform:"scale(1)" }
+    ],
+    {
+      duration:500
     }
+  );
 
 }
-
-
-/* =========================
-   SMALL HEART BURST
-========================= */
-
-function createHearts() {
-
-    for(let i = 0; i < 25; i++) {
-
-        const heart = document.createElement("div");
-
-        heart.innerHTML = "❤️";
-
-        heart.style.position = "fixed";
-        heart.style.left = "50%";
-        heart.style.top = "50%";
-        heart.style.zIndex = "9999";
-        heart.style.pointerEvents = "none";
-
-        document.body.appendChild(heart);
-
-        const x =
-            (Math.random() - .5) * 500;
-
-        const y =
-            (Math.random() - .5) * 500;
-
-        heart.animate(
-            [
-                {
-                    transform: "translate(-50%,-50%) scale(0)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                        `translate(calc(-50% + ${x}px),
-                                   calc(-50% + ${y}px))
-                         scale(1.5)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: 1200,
-                easing: "ease-out"
-            }
-        );
-
-        setTimeout(() => heart.remove(), 1200);
-    }
-
-}
-
-
-/* =========================
-   PARTICLE BACKGROUND
-========================= */
-
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-let particles = [];
-
-function resizeCanvas() {
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize", resizeCanvas);
-
-for(let i = 0; i < 80; i++) {
-
-    particles.push({
-
-        x: Math.random() * window.innerWidth,
-
-        y: Math.random() * window.innerHeight,
-
-        size: Math.random() * 2 + .5,
-
-        speed:
-            Math.random() * .4 + .1,
-
-        opacity:
-            Math.random() * .5 + .1
-
-    });
-
-}
-
-function animateParticles() {
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach(p => {
-
-        p.y -= p.speed;
-
-        if(p.y < -10) {
-
-            p.y = canvas.height + 10;
-
-            p.x = Math.random() *
-                canvas.width;
-
-        }
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle =
-            `rgba(255,150,190,${p.opacity})`;
-
-        ctx.fill();
-
-    });
-
-    requestAnimationFrame(animateParticles);
-
-}
-
-animateParticles();
-
-
-/* =========================
-   CURSOR GLOW
-========================= */
-
-const glow = document.createElement("div");
-
-glow.style.position = "fixed";
-glow.style.width = "250px";
-glow.style.height = "250px";
-glow.style.borderRadius = "50%";
-glow.style.pointerEvents = "none";
-glow.style.zIndex = "-2";
-glow.style.background =
-    "radial-gradient(circle, rgba(255,70,130,.08), transparent 70%)";
-glow.style.transform = "translate(-50%,-50%)";
-
-document.body.appendChild(glow);
-
-document.addEventListener("mousemove", e => {
-
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
-
-});
 
 </script>
 
