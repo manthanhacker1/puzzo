@@ -10,8 +10,7 @@ st.set_page_config(
 
 # Google Drive image
 PHOTO_URL = (
-    "https://drive.google.com/uc?"
-    "export=view&id=1pwDLBt6uJrZo0rJSB0HHisuuWUEyL3OZ"
+    "https://ibb.co/8gNLLb52"
 )
 
 html = f"""
