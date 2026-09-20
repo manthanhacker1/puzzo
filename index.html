@@ -1,692 +1,359 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>A Little Something 💌</title>
-
-<style>
-
-@import url(
-  'https://ibb.co/8gNLLb52'
-);
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:
-    radial-gradient(
-      circle at top left,
-      #fff0f5,
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #fff9fb,
-      #ffffff,
-      #fff7f2
-    );
-
-  color:#292126;
-  font-family:"DM Sans",sans-serif;
-}
-
-.container{
-  width:min(1080px,92%);
-  margin:auto;
-}
-
-
-/* HERO */
-
-.hero{
-  text-align:center;
-  padding:90px 20px 60px;
-}
-
-.eyebrow{
-  color:#ad7185;
-  font-size:11px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-weight:700;
-}
-
-.hero h1{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(55px,9vw,105px);
-  line-height:.92;
-  font-weight:500;
-  margin:20px 0 25px;
-}
-
-.hero p{
-  max-width:650px;
-  margin:auto;
-  color:#7e7077;
-  font-size:17px;
-  line-height:1.8;
-}
-
-
-/* PRODUCT */
-
-.product{
-  max-width:780px;
-  margin:20px auto 90px;
-
-  background:rgba(255,255,255,.94);
-
-  border:1px solid #f0dfe5;
-  border-radius:32px;
-
-  padding:14px;
-
-  box-shadow:
-    0 25px 70px rgba(65,30,45,.10);
-}
-
-.product-image{
-  width:100%;
-  height:650px;
-
-  object-fit:cover;
-
-  display:block;
-
-  border-radius:25px;
-}
-
-.product-info{
-  padding:32px 20px 22px;
-}
-
-.badge{
-  display:inline-block;
-
-  padding:8px 14px;
-
-  border-radius:30px;
-
-  background:#fff0f5;
-  color:#a4516e;
-
-  font-size:11px;
-  font-weight:700;
-
-  letter-spacing:1px;
-}
-
-.product-info h2{
-  font-family:"Playfair Display",serif;
-  font-size:45px;
-
-  margin-top:15px;
-  margin-bottom:5px;
-}
-
-.tagline{
-  color:#806f77;
-  margin-bottom:27px;
-}
-
-
-/* DETAILS */
-
-.details{
-  border-top:1px solid #eee;
-
-  padding-top:20px;
-
-  display:grid;
-  gap:15px;
-}
-
-.detail{
-  display:flex;
-  justify-content:space-between;
-
-  font-size:14px;
-
-  color:#62555c;
-}
-
-.detail-value{
-  color:#a4516e;
-  text-align:right;
-}
-
-
-/* BUTTON */
-
-.order-btn{
-  width:100%;
-
-  margin-top:32px;
-
-  padding:17px;
-
-  border:0;
-  border-radius:50px;
-
-  background:#292126;
-  color:white;
-
-  font-size:15px;
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-.order-btn:hover{
-  background:#a4516e;
-  transform:translateY(-2px);
-}
-
-
-/* CHECKOUT */
-
-.checkout{
-  display:none;
-
-  max-width:800px;
-
-  margin:0 auto 90px;
-
-  padding:65px 25px;
-
-  text-align:center;
-
-  border-radius:32px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0f5,
-      #fff8eb
-    );
-
-  border:1px solid #efd8df;
-
-  box-shadow:
-    0 20px 60px rgba(70,35,50,.07);
-}
-
-.checkout.show{
-  display:block;
-
-  animation:appear .7s ease;
-}
-
-.checkout-icon{
-  font-size:55px;
-
-  margin-bottom:18px;
-}
-
-.checkout h2{
-  font-family:"Playfair Display",serif;
-
-  font-size:48px;
-
-  margin-bottom:22px;
-}
-
-.checkout p{
-  max-width:630px;
-
-  margin:auto;
-
-  color:#75666d;
-
-  font-size:17px;
-
-  line-height:1.8;
-}
-
-.highlight{
-  color:#a4516e;
-  font-weight:700;
-}
-
-.date-btn{
-  margin-top:30px;
-
-  padding:15px 32px;
-
-  border:0;
-  border-radius:50px;
-
-  background:#292126;
-  color:#fff;
-
-  font-weight:700;
-
-  cursor:pointer;
-}
-
-.final-message{
-  display:none;
-
-  margin-top:30px;
-
-  color:#a4516e !important;
-
-  font-weight:600;
-}
-
-.final-message.show{
-  display:block;
-
-  animation:appear .6s ease;
-}
-
-
-/* SECOND PHOTO */
-
-.second-section{
-  display:none;
-
-  max-width:780px;
-
-  margin:0 auto 90px;
-
-  text-align:center;
-}
-
-.second-section.show{
-  display:block;
-
-  animation:appear .7s ease;
-}
-
-.second-section img{
-  width:100%;
-
-  max-height:600px;
-
-  object-fit:cover;
-
-  border-radius:28px;
-
-  box-shadow:
-    0 20px 60px rgba(70,35,50,.10);
-}
-
-.second-section h2{
-  font-family:"Playfair Display",serif;
-
-  font-size:42px;
-
-  margin:25px 0 10px;
-}
-
-.second-section p{
-  color:#7d6e75;
-
-  line-height:1.7;
-}
-
-
-/* FOOTER */
-
-.footer{
-  text-align:center;
-
-  color:#9a898f;
-
-  padding:20px 0 60px;
-
-  font-size:12px;
-}
-
-
-/* ANIMATION */
-
-@keyframes appear{
-
-  from{
-    opacity:0;
-    transform:translateY(25px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-  .hero{
-    padding-top:60px;
-  }
-
-  .product-image{
-    height:500px;
-  }
-
-  .checkout h2{
-    font-size:38px;
-  }
-
-  .detail{
-    gap:20px;
-  }
-
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Little Question 💌</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 91, 135, .25), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, .22), transparent 30%),
+        linear-gradient(135deg, #0b0710, #180c19 50%, #0b0710);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      overflow-x: hidden;
+    }
+
+    .card {
+      width: min(520px, 100%);
+      padding: 42px 30px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 30px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(25px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #ff4f81;
+      filter: blur(90px);
+      opacity: .25;
+      top: -80px;
+      right: -60px;
+    }
+
+    .emoji {
+      font-size: 58px;
+      margin-bottom: 18px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-size: clamp(32px, 8vw, 48px);
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #ff6b9a, #ffb1c8);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #cfc5d0;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 15px 30px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+
+    .yes {
+      color: white;
+      background: linear-gradient(135deg, #ff477e, #ff6a9a);
+      box-shadow: 0 10px 30px rgba(255,71,126,.3);
+    }
+
+    .yes:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .no {
+      color: #ddd;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .no:hover {
+      transform: translateY(-2px);
+    }
+
+    .message-box {
+      display: none;
+      margin-top: 20px;
+      animation: appear .4s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      resize: vertical;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.2);
+      color: white;
+      border-radius: 18px;
+      padding: 15px;
+      outline: none;
+      font: inherit;
+      margin-bottom: 12px;
+    }
+
+    textarea:focus {
+      border-color: #ff6b9a;
+    }
+
+    .send {
+      width: 100%;
+      background: white;
+      color: #171018;
+    }
+
+    .response {
+      display: none;
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+      line-height: 1.5;
+    }
+
+    .success {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .small {
+      color: #a99eaa;
+      font-size: 13px;
+      margin-top: 22px;
+    }
+
+    .heart {
+      position: fixed;
+      pointer-events: none;
+      animation: heartFly 2.5s linear forwards;
+      font-size: 20px;
+      z-index: 10;
+    }
+
+    @keyframes heartFly {
+      0% {
+        transform: translateY(0) scale(.5);
+        opacity: 0;
+      }
+      20% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .card {
+        padding: 35px 22px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <main class="card">
+    <div class="glow"></div>
 
-<div class="container">
+    <div class="emoji">💌</div>
 
+    <h1>
+      Okay... I have a
+      <span class="gradient">question.</span>
+    </h1>
 
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="eyebrow">
-    A very limited edition
-  </div>
-
-  <h1>
-    A Little<br>
-    Something 💌
-  </h1>
-
-  <p>
-    You said you'd order a gift for me...
-    so I thought I'd return the favour
-    and show you what I'd actually like to order.
-  </p>
-
-</section>
-
-
-<!-- PRODUCT -->
-
-<section class="product">
-
-  <img
-    class="product-image"
-    src="PHOTO_PLACEHOLDER"
-    alt="Something special"
-  >
-
-  <div class="product-info">
-
-    <div class="badge">
-      ONLY ONE AVAILABLE
-    </div>
-
-    <h2>
-      You. ✨
-    </h2>
-
-    <p class="tagline">
-      Rare. Pretty. And slightly too easy to like.
+    <p class="subtitle">
+      We've matched, we've talked...
+      so I think it's time I ask you something slightly more important.
     </p>
 
+    <div class="question">
+      Would you go on a date with me? 👀
+    </div>
 
-    <div class="details">
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">
+        Yes, let's go ❤️
+      </button>
 
-      <div class="detail">
+      <button class="no" onclick="sayNo()">
+        Hmm... maybe 😌
+      </button>
+    </div>
 
-        <b>Availability</b>
+    <div class="message-box" id="messageBox">
 
-        <span class="detail-value">
-          Extremely rare
-        </span>
+      <textarea
+        id="message"
+        placeholder="Tell me what you're thinking... 💭"
+      ></textarea>
 
-      </div>
-
-
-      <div class="detail">
-
-        <b>Eyes</b>
-
-        <span class="detail-value">
-          A little distracting
-        </span>
-
-      </div>
-
-
-      <div class="detail">
-
-        <b>Smile</b>
-
-        <span class="detail-value">
-          Honestly unfair
-        </span>
-
-      </div>
-
-
-      <div class="detail">
-
-        <b>Personality</b>
-
-        <span class="detail-value">
-          Still discovering 😌
-        </span>
-
-      </div>
-
-
-      <div class="detail">
-
-        <b>Delivery</b>
-
-        <span class="detail-value">
-          In person only
-        </span>
-
-      </div>
+      <button class="send" onclick="sendMessage()">
+        Send it 💌
+      </button>
 
     </div>
 
+    <div class="response" id="response"></div>
 
-    <button
-      class="order-btn"
-      onclick="orderGift()"
-    >
-      Add to cart 💗
-    </button>
+    <div class="small">
+      No pressure. Just two people potentially having a dangerously good time. ✨
+    </div>
 
-  </div>
+  </main>
 
-</section>
+  <script>
 
+    function createHearts() {
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement("div");
 
-<!-- SURPRISE -->
+        heart.className = "heart";
+        heart.innerHTML = ["❤️", "💗", "💕", "💖"][Math.floor(Math.random() * 4)];
 
-<section
-  id="checkout"
-  class="checkout"
->
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-30px";
+        heart.style.animationDelay = Math.random() * .8 + "s";
 
-  <div class="checkout-icon">
-    🛒💌
-  </div>
+        document.body.appendChild(heart);
 
+        setTimeout(() => heart.remove(), 3500);
+      }
+    }
 
-  <h2>
-    Order Confirmed...
-  </h2>
+    function sayYes() {
 
+      createHearts();
 
-  <p>
+      document.getElementById("messageBox").style.display = "block";
 
-    Wait.
+      document.getElementById("response").style.display = "block";
 
-    <br><br>
+      document.getElementById("response").innerHTML = `
+        <div class="success">🥹❤️</div>
+        <strong>Okay, that's a yes!</strong><br>
+        Now tell me what kind of date you're imagining...
+      `;
+    }
 
-    There's a tiny problem with your order.
+    function sayNo() {
 
-    <br><br>
+      const response = document.getElementById("response");
 
-    This particular gift
-    <span class="highlight">
-      isn't available for delivery.
-    </span>
+      response.style.display = "block";
 
-    <br><br>
+      response.innerHTML = `
+        <div class="success">😌</div>
+        <strong>I'll take "maybe"...</strong><br>
+        What would convince you?
+      `;
 
-    Because you're not something
-    I want to put in a cart.
+      document.getElementById("messageBox").style.display = "block";
+    }
 
-    You're someone
-    <b>I actually want to spend time with.</b>
+    function sendMessage() {
 
-    <br><br>
+      const message =
+        document.getElementById("message").value.trim();
 
-    So I have a better idea...
+      if (!message) {
+        alert("Write something first 😭");
+        return;
+      }
 
-  </p>
+      document.getElementById("response").style.display = "block";
 
+      document.getElementById("response").innerHTML = `
+        <div class="success">💌</div>
+        <strong>Message received.</strong><br>
+        "${escapeHTML(message)}"
+        <br><br>
+        <span style="color:#aaa">
+          Now we just need to pick a day 😉
+        </span>
+      `;
 
-  <button
-    class="date-btn"
-    onclick="makeItADate()"
-  >
-    Upgrade the order ☕🍰
-  </button>
+      createHearts();
+    }
 
+    function escapeHTML(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
 
-  <p
-    id="finalMessage"
-    class="final-message"
-  >
-
-    Basque + cheese tiramisu.
-
-    <br>
-
-    Good food, good conversation,
-    and hopefully a little trouble. 😌
-
-    <br><br>
-
-    <b>
-      Consider this my actual order.
-      ❤️
-    </b>
-
-  </p>
-
-</section>
-
-
-<!-- FINAL -->
-
-<section
-  id="finalSection"
-  class="second-section"
->
-
-  <img
-    src="PHOTO_PLACEHOLDER"
-    alt="You"
-  >
-
-  <h2>
-    One last thing...
-  </h2>
-
-  <p>
-    I started this because I wanted to order
-    you a gift.
-
-    <br><br>
-
-    But honestly,
-    I'd rather make a memory with you. ❤️
-  </p>
-
-</section>
-
-
-<div class="footer">
-  Made with slightly questionable amounts of thoughtfulness ✨
-</div>
-
-
-</div>
-
-
-<script>
-
-
-function orderGift(){
-
-  const checkout =
-    document.getElementById("checkout");
-
-  checkout.classList.add("show");
-
-  checkout.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-}
-
-
-function makeItADate(){
-
-  const message =
-    document.getElementById("finalMessage");
-
-  const finalSection =
-    document.getElementById("finalSection");
-
-
-  message.classList.add("show");
-
-
-  setTimeout(() => {
-
-    finalSection.classList.add("show");
-
-    finalSection.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  },700);
-
-}
-
-
-</script>
-
+  </script>
 
 </body>
-
 </html>
