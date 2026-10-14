@@ -1,128 +1,256 @@
-        <p class="bodycopy">First, <strong>I'm genuinely sorry</strong> for the ways I hurt you or made you feel misunderstood. I'm not saying this to erase anything. I just wish I'd understood it sooner.</p>
-        <p class="bodycopy">Tujhyasobat ghalavlela time majhyasathi kharach special hota. Tujha smile, tuzhi way of talking, ani tu agdi normal moments pan special karaychis — those little things are still with me.</p>
-        <p class="bodycopy">I always admired how you could be so completely <strong>you</strong>. There's something about your presence that made ordinary days feel different. I don't expect one page to change the past; I just didn't want to pretend those memories meant nothing to me.</p>
-      </section>
+import streamlit as st
 
-      <section class="paper">
-        <p class="section-label">02 / tiny memory lane</p>
-        <h2>Tap a card. Pick a little smile. ✨</h2>
-        <p class="bodycopy">Three tiny reminders of the kind of details that tend to stay with someone.</p>
-        <div class="cards">
-          <article class="memory" tabindex="0" role="button" aria-expanded="false">
-            <span class="emoji">🌷</span><h3>Your vibe</h3><p class="reveal">There's a softness in the way you are that makes you memorable without even trying.</p><span class="tap">tap to open ↗</span>
-          </article>
-          <article class="memory" tabindex="0" role="button" aria-expanded="false">
-            <span class="emoji">☁️</span><h3>Little things</h3><p class="reveal">It's rarely the big moments only. It's the random talks and silly little things that stick.</p><span class="tap">tap to open ↗</span>
-          </article>
-          <article class="memory" tabindex="0" role="button" aria-expanded="false">
-            <span class="emoji">💗</span><h3>What I admire</h3><p class="reveal">You have your own way of making an impression. You don't need to try to be anyone else.</p><span class="tap">tap to open ↗</span>
-          </article>
-        </div>
-      </section>
+st.set_page_config(
+    page_title="A little note for Mitali",
+    page_icon="🌙",
+    layout="centered",
+)
 
-      <section class="paper invite" id="coffee">
-        <span class="coffee">☕</span>
-        <p class="section-label">03 / the actual question</p>
-        <h2>Can I borrow you for a coffee sometime?</h2>
-        <p class="bodycopy">No heavy conversation agenda. Just coffee, a little catch-up, and seeing how it feels to talk in person. You can pick the place.</p>
-        <div class="vibe-title">Choose the coffee vibe (optional)</div>
-        <div class="vibes">
-          <button class="vibe" type="button">☕ Cozy café</button>
-          <button class="vibe" type="button">🧋 Something cold</button>
-          <button class="vibe" type="button">🌆 Evening walk</button>
-        </div>
-        <div class="actions" id="actions">
-          <button class="yes-btn" id="yesBtn" type="button">Okay, let's have coffee ♡</button>
-          <button class="no-btn" id="noBtn" type="button">No 🙈</button>
-        </div>
-        <div class="response" id="yesResponse" aria-live="polite">
-          <div class="big">🥹💗☕</div><h3>Wait, really?</h3>
-          <p>Okay, this made me smile. Text me whenever you're comfortable and we can figure out a time and place together. No rush. ♡</p>
-        </div>
-        <div class="response" id="noResponse" aria-live="polite">
-          <div class="big">🌷</div><h3>Okay, I hear you.</h3>
-          <p>Thank you for reading this far. You can be honest with me; I won't push you. I hope life treats you kindly, Mitali. ♡</p>
-        </div>
-        <p class="note-after" id="playNote">P.S. The “No” button is a little shy. It may run away once or twice. 😭</p>
-      </section>
-      <div class="footer">made with care &nbsp;·&nbsp; no pressure, just honesty &nbsp;♡<br>whatever you choose, thank you for being part of my story.</div>
-    </section>
-  </main>
+for key, default in {
+    "unlocked": False,
+    "show_hint": False,
+    "coffee_response": "",
+}.items():
+    if key not in st.session_state:
+        st.session_state[key] = default
+
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+    --bg1: #120a12;
+    --bg2: #241224;
+    --card: rgba(38, 20, 36, 0.78);
+    --ink: #fbeef3;
+    --muted: #c9a6b6;
+    --rose: #ff7fa8;
+    --rose-soft: #ffb3c9;
+    --plum: #7a2f56;
+    --line: rgba(255, 143, 180, 0.22);
+}
+
+.stApp {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255,127,168,.18) 0, transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(160,90,255,.18) 0, transparent 35%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+    color: var(--ink);
+    font-family: 'Quicksand', sans-serif;
+}
+[data-testid="stHeader"] { background: transparent; }
+.block-container { max-width: 640px; padding-top: 2.2rem; padding-bottom: 3rem; }
+
+/* floating hearts in the background */
+.hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.heart {
+    position: absolute; bottom: -40px; color: rgba(255,143,180,.35);
+    animation: rise linear infinite;
+}
+@keyframes rise {
+    to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+}
+
+.eyebrow {
+    color: var(--rose-soft); text-align: center; text-transform: uppercase;
+    letter-spacing: .24em; font-size: .7rem; margin-bottom: 1rem; opacity: .85;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: var(--card) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 28px !important;
+    box-shadow: 0 25px 70px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+    backdrop-filter: blur(10px);
+    animation: float-in .9s ease both;
+}
+@keyframes float-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero { text-align: center; padding: .6rem .2rem 1rem; }
+.seal {
+    width: 78px; height: 78px; display: grid; place-items: center; margin: 0 auto 1.1rem;
+    border-radius: 50%; font-size: 2.2rem;
+    background: radial-gradient(circle, #ff8fb3, #b03a6b);
+    box-shadow: 0 0 0 8px rgba(255,127,168,.12), 0 0 40px rgba(255,127,168,.45);
+    animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.07); }
+}
+.hero h1, .note-title {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700;
+    font-size: clamp(2.1rem, 7vw, 2.9rem); letter-spacing: -.02em;
+    color: var(--ink); margin: .2rem 0 .5rem;
+}
+.hero h1 span { color: var(--rose); font-style: italic; }
+.hero-copy { color: var(--muted); line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+.note-pill {
+    display: inline-block; color: #120a12; background: var(--rose-soft);
+    border-radius: 999px; padding: .4rem .85rem; font-size: .72rem;
+    font-weight: 700; letter-spacing: .08em; margin-bottom: .8rem;
+}
+.letter { color: #efd7e1; font-size: 1rem; line-height: 1.85; }
+.letter p { margin: 0 0 1rem; }
+.letter strong { color: var(--rose-soft); }
+
+.divider {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--rose-soft); margin: 1.5rem 0 1rem; font-size: .8rem; letter-spacing: .1em;
+}
+.divider:before, .divider:after { content: ''; height: 1px; background: var(--line); flex: 1; }
+
+.question {
+    text-align: center; padding: 1.4rem 1rem;
+    background: linear-gradient(135deg, rgba(255,127,168,.14), rgba(160,90,255,.12));
+    border: 1px solid var(--line); border-radius: 22px;
+}
+.question-title {
+    font-family: 'Fraunces', Georgia, serif; font-size: 1.6rem;
+    font-style: italic; color: var(--ink); margin: 0 0 .4rem;
+}
+.question-sub { color: var(--muted); font-size: .9rem; margin: 0; }
+
+.hint {
+    color: var(--rose-soft); background: rgba(255,127,168,.1);
+    border: 1px dashed var(--rose); border-radius: 14px;
+    padding: .75rem .9rem; text-align: center; font-size: .9rem; margin-top: .8rem;
+}
+.tiny, .footer { color: #9a7f8e; text-align: center; font-size: .78rem; line-height: 1.6; }
+
+div[data-testid="stTextInput"] input {
+    background: rgba(18,10,18,.7) !important; color: var(--ink) !important;
+    border: 1px solid var(--line) !important; border-radius: 16px !important;
+    min-height: 3rem;
+}
+div[data-testid="stTextInput"] input:focus { border-color: var(--rose) !important; box-shadow: 0 0 0 3px rgba(255,127,168,.2) !important; }
+
+div.stButton > button,
+div[data-testid="stFormSubmitButton"] > button {
+    width: 100%; min-height: 3rem; border-radius: 16px; font-weight: 700;
+    transition: transform .15s ease, box-shadow .2s ease;
+}
+div[data-testid="stFormSubmitButton"] > button {
+    background: linear-gradient(135deg, #ff7fa8, #b03a6b); color: white; border: none;
+}
+div.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #ff7fa8, #b03a6b); color: white; border: none;
+}
+div.stButton > button[kind="secondary"] {
+    background: rgba(255,255,255,.06); color: var(--ink); border: 1px solid var(--line);
+}
+div.stButton > button:hover, div[data-testid="stFormSubmitButton"] > button:hover {
+    transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255,127,168,.3);
+}
+
+div[data-testid="stAlert"] { border-radius: 16px; }
+
+@media (max-width: 480px) {
+    .block-container { padding: 1.2rem 1rem 2rem; }
+}
+</style>
+
+<div class="hearts">
+    <span class="heart" style="left:8%; font-size:18px; animation-duration:14s;">♡</span>
+    <span class="heart" style="left:22%; font-size:26px; animation-duration:19s; animation-delay:-4s;">♡</span>
+    <span class="heart" style="left:45%; font-size:14px; animation-duration:12s; animation-delay:-7s;">♡</span>
+    <span class="heart" style="left:63%; font-size:30px; animation-duration:22s; animation-delay:-2s;">♡</span>
+    <span class="heart" style="left:82%; font-size:20px; animation-duration:16s; animation-delay:-9s;">♡</span>
+    <span class="heart" style="left:93%; font-size:12px; animation-duration:11s; animation-delay:-5s;">♡</span>
 </div>
-<script>
-const form=document.getElementById('passForm');
-const password=document.getElementById('password');
-const hint=document.getElementById('hint');
-form.addEventListener('submit',function(e){
-  e.preventDefault();
-  if(password.value.trim().toLowerCase()==='mitali'){
-    document.getElementById('gate').style.display='none';
-    document.getElementById('main').style.display='block';
-    window.scrollTo({top:0,behavior:'smooth'});
-    burst(window.innerWidth/2,180);
-  } else {
-    hint.textContent='Not quite… hint: try entering your name 😉';
-    password.value='';
-    password.focus();
-  }
-});
-// Tap-to-reveal memory cards
-function revealCard(card){card.classList.toggle('revealed');card.setAttribute('aria-expanded',card.classList.contains('revealed')?'true':'false');}
-document.querySelectorAll('.memory').forEach(card=>{
-  card.addEventListener('click',()=>revealCard(card));
-  card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealCard(card);}});
-});
-// Coffee-vibe selection
-let pickedVibe='';
-document.querySelectorAll('.vibe').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('.vibe').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');pickedVibe=btn.textContent.trim();
-}));
-function burst(x,y){
-  const bits=['♡','💗','✦','🌷','✨'];
-  for(let i=0;i<15;i++){
-    const el=document.createElement('span');el.className='heart';el.textContent=bits[Math.floor(Math.random()*bits.length)];
-    el.style.left=(x+(Math.random()-.5)*220)+'px';el.style.top=(y+(Math.random()-.5)*60)+'px';el.style.animationDelay=(Math.random()*.25)+'s';
-    document.body.appendChild(el);setTimeout(()=>el.remove(),1800);
-  }
-}
-const yesBtn=document.getElementById('yesBtn'),noBtn=document.getElementById('noBtn');
-const actions=document.getElementById('actions');let dodges=0,settled=false;
-function dodgeNo(){
-  if(settled)return;
-  dodges++;
-  if(dodges>=4){
-    noBtn.textContent='Okay, honestly no';
-    noBtn.style.transform='none';noBtn.style.position='static';
-    document.getElementById('playNote').textContent='Okay okay 😭 no more running. Choose whatever feels right.';
-    return;
-  }
-  const area=actions.getBoundingClientRect();
-  const maxX=Math.max(8,area.width-noBtn.offsetWidth-8);
-  const maxY=46;
-  noBtn.style.position='absolute';
-  noBtn.style.left=(Math.random()*maxX)+'px';
-  noBtn.style.top=((Math.random()-.5)*maxY)+'px';
-  noBtn.style.transform='rotate('+(Math.random()*12-6)+'deg)';
-  document.getElementById('playNote').textContent=['Oops, too slow 🙈','She said: catch me if you can 😭','Okay this button is dramatic.'][Math.min(dodges-1,2)];
-}
-noBtn.addEventListener('pointerenter',dodgeNo);
-noBtn.addEventListener('click',()=>{
-  if(dodges<4){dodgeNo();return;}
-  settled=true;
-  document.getElementById('yesResponse').classList.remove('show');
-  document.getElementById('noResponse').classList.add('show');
-  document.getElementById('playNote').textContent='Thank you for being honest. ♡';
-  burst(window.innerWidth/2,window.scrollY+window.innerHeight*.65);
-  document.getElementById('noResponse').scrollIntoView({behavior:'smooth',block:'center'});
-});
-yesBtn.addEventListener('click',()=>{
-  settled=true;
-  document.getElementById('noResponse').classList.remove('show');
-  const response=document.getElementById('yesResponse');
-  response.classList.add('show');
-  const p=response.querySelector('p');
-  p.textContent='Okay, this made me smile. '+(pickedVibe?'You picked '+pickedVibe+'. ':'')+'Text me whenever you\'re comfortable and we can figure out a time and place together. No rush. ♡';
-  document.getElementById('playNote').textContent='One little yes just made this whole page worth it. 💗';
-  burst(window.innerWidth/2,window.scrollY+window.innerHeight*.65);
-  response.scrollIntoView({behavior:'smooth',block:'center'});
+<div class="eyebrow">✦ a small note, made with care ✦</div>
+""", unsafe_allow_html=True)
+
+if not st.session_state.unlocked:
+    with st.container(border=True):
+        st.markdown("""
+        <div class="hero">
+            <div class="seal">♡</div>
+            <h1>Hey, <span>Mitali.</span></h1>
+            <p class="hero-copy">
+            There's something I wanted to say properly, without making it a long text.
+            This little page is just for you. ✨
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        with st.form("password_form"):
+            entered_password = st.text_input(
+                "A tiny password to open it",
+                placeholder="hint: it's your name 🌸",
+                type="password",
+            )
+            submitted = st.form_submit_button("Open the note 💌", use_container_width=True)
+
+        if submitted:
+            if entered_password.strip().casefold() == "mitali":
+                st.session_state.unlocked = True
+                st.session_state.show_hint = False
+                st.balloons()
+                st.rerun()
+            else:
+                st.session_state.show_hint = True
+
+        if st.session_state.show_hint:
+            st.markdown(
+                '<div class="hint">Almost! 🙈 Try the name of the person this note is for.</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown('<p class="tiny">Nothing complicated, promise.</p>', unsafe_allow_html=True)
+
+else:
+    with st.container(border=True):
+        st.markdown("""
+        <div class="note-pill">✦ JUST BEING HONEST ✦</div>
+        <h1 class="note-title">One thing I wanted you to know.</h1>
+        <div class="letter">
+            <p>Hey Mitali,</p>
+            <p>First, <strong>I'm genuinely sorry</strong> for the ways I may have hurt you
+            or made you feel misunderstood. I can't undo what happened, and I'm not expecting
+            an apology to fix everything. I just wanted to say it honestly. 🫶</p>
+            <p>Tujhyasobat ghalavlela every single moment majhyasathi special hota. Tujha smile,
+            tu bolnyachi style, ani agdi simple moments pan memorable karaychi tuzhi way,
+            these are things I still remember. You have a warmth that made ordinary days
+            feel different, and I'm really glad I got to know you. 🌙</p>
+            <p>I don't want to pressure you or make things awkward. You mattered to me,
+            and the good memories still mean something to me.</p>
+        </div>
+        <div class="divider">✦ one simple question ✦</div>
+        <div class="question">
+            <p class="question-title">Would you be open to coffee sometime? ☕</p>
+            <p class="question-sub">Just a calm conversation. Whatever you pick, I'm okay with it.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.write("")
+        yes_col, no_col = st.columns(2)
+
+        with yes_col:
+            if st.button("Yes, I'd like that ☕", key="yes_coffee", type="primary", use_container_width=True):
+                st.session_state.coffee_response = "yes"
+                st.balloons()
+
+        with no_col:
+            if st.button("Not right now 🌿", key="no_coffee", type="secondary", use_container_width=True):
+                st.session_state.coffee_response = "no"
+
+        if st.session_state.coffee_response == "yes":
+            st.success(
+                "That makes me really happy. ☕ Text me whenever you're comfortable, "
+                "and you pick the time and place. We'll keep it simple."
+            )
+        elif st.session_state.coffee_response == "no":
+            st.info(
+                "That's completely okay, and thank you for reading this. "
+                "I respect your answer and won't push. 🌿"
+            )
+
+st.markdown(
+    '<p class="footer">Made with care. Your answer is yours to choose, and either one will be respected. 🌙</p>',
+    unsafe_allow_html=True,
+)
