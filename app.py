@@ -1,1362 +1,251 @@
+
 import streamlit as st
-import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="A Little Surprise 🎁",
-    page_icon="🎁",
+    page_title="A little note for Mitali",
+    page_icon="♡",
     layout="centered",
-    initial_sidebar_state="collapsed"
 )
 
-components.html(r"""
-<!DOCTYPE html>
-<html>
-<head>
+for key, default in {
+    "unlocked": False,
+    "show_hint": False,
+    "coffee_response": "",
+}.items():
+    if key not in st.session_state:
+        st.session_state[key] = default
 
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
-
+st.markdown("""
 <style>
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+:root {
+    --ink: #382631;
+    --muted: #806b76;
+    --rose: #bd7188;
+    --dark: #9d4c67;
+    --line: #ead8dc;
 }
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
+.stApp {
+    background: radial-gradient(ellipse at 12% 10%,
+    #fffaf7 0, transparent 38%),
+    radial-gradient(ellipse at 90% 85%,
+    #efdde5 0, transparent 38%), #f7f0eb;
+    color: var(--ink);
 }
-
-body {
-    min-height: 100svh;
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "Segoe UI",
-        sans-serif;
-
-    color: #fff;
-
-    background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(255, 85, 145, .20),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 90% 90%,
-            rgba(160, 80, 255, .14),
-            transparent 30%
-        ),
-        linear-gradient(
-            160deg,
-            #08070b 0%,
-            #130b13 55%,
-            #09070b 100%
-        );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding:
-        max(18px, env(safe-area-inset-top))
-        16px
-        max(18px, env(safe-area-inset-bottom))
-        16px;
-
-    overflow-x: hidden;
+[data-testid="stHeader"] { background: transparent; }
+.block-container {
+    max-width: 620px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
-
-
-/* MAIN CARD */
-
-.card {
-
-    width: 100%;
-    max-width: 430px;
-
-    padding: 30px 20px 26px;
-
-    border-radius: 30px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.55);
-
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-
+.eyebrow {
+    color: var(--muted);
     text-align: center;
-
-    animation: enter .45s ease;
-
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    font-size: .68rem;
+    margin-bottom: 1rem;
 }
-
-@keyframes enter {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
+.hero { text-align: center; padding: .4rem .2rem .8rem; }
+.seal {
+    width: 64px; height: 64px; display: grid;
+    place-items: center; margin: 0 auto 1.1rem;
+    border-radius: 22px; background: #f5e5e9;
+    color: var(--dark); font-size: 1.8rem;
 }
-
-
-/* ICON */
-
-.icon {
-
-    font-size: 54px;
-
-    line-height: 1;
-
-    margin-bottom: 18px;
-
-    animation:
-        float 3s ease-in-out infinite;
-
+.hero h1, .note-title {
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 7vw, 2.7rem);
+    font-weight: 500; letter-spacing: -.035em;
 }
-
-@keyframes float {
-
-    50% {
-        transform: translateY(-6px);
-    }
-
+.hero-copy {
+    color: var(--muted); line-height: 1.7;
+    max-width: 355px; margin: 0 auto 1rem;
 }
-
-
-/* TYPOGRAPHY */
-
-h1 {
-
-    margin: 0 0 12px;
-
-    font-size: clamp(30px, 9vw, 38px);
-
-    line-height: 1.08;
-
-    letter-spacing: -1.2px;
-
+.note-pill {
+    display: inline-block; color: var(--dark);
+    background: #f5e5e9; border-radius: 999px;
+    padding: .42rem .75rem; font-size: .7rem;
+    font-weight: 700; letter-spacing: .05em;
+    margin-bottom: 1rem;
 }
-
-.subtitle {
-
-    color: #b8aeb9;
-
-    font-size: 15px;
-
-    line-height: 1.55;
-
-    margin:
-        0 auto 24px;
-
-    max-width: 350px;
-
+.note-title { font-size: clamp(2rem, 7vw, 2.6rem); }
+.letter { color: #5b4651; font-size: .97rem; line-height: 1.85; }
+.letter p { margin: 0 0 1rem; }
+.letter strong { color: #8f3f5a; }
+.divider {
+    display: flex; align-items: center; gap: 12px;
+    color: #b98b99; margin: 1.4rem 0 1rem;
+    font-size: .78rem;
 }
-
-.gradient {
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff5c91,
-            #ffb4ca
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
+.divider:before, .divider:after {
+    content: ''; height: 1px; background: var(--line); flex: 1;
 }
-
-
-/* PASSWORD AREA */
-
-input {
-
-    width: 100%;
-
-    height: 56px;
-
-    padding: 0 16px;
-
-    border-radius: 16px;
-
-    border:
-        1px solid rgba(255,255,255,.13);
-
-    background:
-        rgba(0,0,0,.28);
-
-    color: white;
-
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 17px;
-
-    text-align: center;
-
-    -webkit-appearance: none;
-
-    margin-bottom: 12px;
-
+.question {
+    text-align: center; background: #fff5f5;
+    border: 1px solid #f0dce2; border-radius: 20px;
+    padding: 1.15rem 1rem;
 }
-
-input:focus {
-
-    border-color: #ff6496;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(255,100,150,.10);
-
+.question-title {
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.45rem; line-height: 1.3;
 }
-
-
-/* PRIMARY BUTTON */
-
-button {
-
-    width: 100%;
-
-    min-height: 56px;
-
-    padding: 14px 18px;
-
-    border: none;
-
-    border-radius: 16px;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    font-weight: 750;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff477f,
-            #ff709e
-        );
-
-    box-shadow:
-        0 12px 28px
-        rgba(255,70,125,.20);
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-
-    transition:
-        transform .15s ease,
-        opacity .15s ease;
-
-}
-
-button:active {
-
-    transform: scale(.97);
-
-}
-
-
-/* ERROR */
-
-.error {
-
-    display: none;
-
-    margin-top: 14px;
-
-    padding: 12px 14px;
-
-    border-radius: 14px;
-
-    color: #ffadb9;
-
-    background:
-        rgba(255,70,90,.08);
-
-    border:
-        1px solid
-        rgba(255,70,90,.15);
-
-    font-size: 14px;
-
-}
-
-
-/* BIG HINT */
-
+.question-sub { color: var(--muted); font-size: .86rem; }
 .hint {
-
-    display: none;
-
-    margin-top: 16px;
-
-    padding: 18px 15px;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,186,70,.12),
-            rgba(255,120,70,.06)
-        );
-
-    border:
-        1px solid
-        rgba(255,190,90,.24);
-
+    color: #8f3f5a; background: #fff0f3;
+    border: 1px solid #f0dce2; border-radius: 12px;
+    padding: .75rem .9rem; text-align: center;
+    font-size: .88rem; margin-top: .8rem;
 }
-
-
-/* THIS IS THE IMPORTANT PART */
-
-.hint-label {
-
-    font-size: 12px;
-
-    letter-spacing: 1.5px;
-
-    color: #ffc76f;
-
-    font-weight: 800;
-
-    margin-bottom: 6px;
-
+.tiny, .footer {
+    color: #9c8791; text-align: center;
+    font-size: .74rem; line-height: 1.6;
 }
-
-.hint-main {
-
-    font-size: 24px;
-
-    line-height: 1.15;
-
-    font-weight: 900;
-
-    color: #fff;
-
+div[data-testid="stTextInput"] input {
+    border: 1px solid var(--line);
+    border-radius: 14px; background: white;
+    min-height: 3rem;
 }
-
-.hint-sub {
-
-    margin-top: 7px;
-
-    color: #c9bec8;
-
-    font-size: 13px;
-
+div.stButton > button,
+div[data-testid="stFormSubmitButton"] > button {
+    width: 100%; min-height: 2.9rem;
+    border-radius: 13px; font-weight: 650;
 }
-
-
-/* PAGES */
-
-.page {
-
-    display: none;
-
+div[data-testid="stFormSubmitButton"] > button {
+    background: var(--dark); color: white;
+    border: 1px solid var(--dark);
 }
-
-
-/* REWARDS */
-
-.rewards {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 10px;
-
-    margin:
-        20px 0 14px;
-
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: rgba(255,250,246,.9);
+    border-color: rgba(234,216,220,.95) !important;
+    border-radius: 25px !important;
+    box-shadow: 0 18px 55px rgba(91,52,68,.09);
 }
-
-.reward {
-
-    min-height: 125px;
-
-    padding: 17px 10px;
-
-    border-radius: 18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.09);
-
-    background:
-        rgba(255,255,255,.045);
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-
-    transition:
-        transform .15s ease,
-        border-color .15s ease,
-        background .15s ease;
-
+@media(max-width:480px) {
+    .block-container { padding: 1.2rem 1rem 2rem; }
 }
-
-.reward:active {
-
-    transform: scale(.97);
-
-}
-
-.reward.selected {
-
-    border-color:
-        rgba(255,100,150,.75);
-
-    background:
-        rgba(255,90,145,.11);
-
-    box-shadow:
-        0 8px 28px
-        rgba(255,80,130,.12);
-
-}
-
-.reward-icon {
-
-    font-size: 31px;
-
-    margin-bottom: 8px;
-
-}
-
-.reward-title {
-
-    font-size: 14px;
-
-    font-weight: 800;
-
-}
-
-.reward-desc {
-
-    color: #918792;
-
-    font-size: 11px;
-
-    line-height: 1.35;
-
-    margin-top: 5px;
-
-}
-
-
-/* RESULT */
-
-.result {
-
-    display: none;
-
-    margin-top: 15px;
-
-    padding: 16px;
-
-    border-radius: 17px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    color: #ddd4dc;
-
-    font-size: 14px;
-
-    line-height: 1.55;
-
-}
-
-
-/* SMALL */
-
-.small {
-
-    margin-top: 18px;
-
-    color: #756d77;
-
-    font-size: 11px;
-
-}
-
-
-/* HEARTS */
-
-.heart {
-
-    position: fixed;
-
-    bottom: -40px;
-
-    z-index: 999;
-
-    pointer-events: none;
-
-    font-size: 20px;
-
-    animation:
-        fly 3s linear forwards;
-
-}
-
-@keyframes fly {
-
-    0% {
-        transform:
-            translateY(0)
-            scale(.5);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateY(-110vh)
-            rotate(360deg);
-        opacity: 0;
-    }
-
-}
-
-
-/* MOBILE */
-
-@media (max-width: 380px) {
-
-    .card {
-        padding:
-            25px 16px;
-    }
-
-    h1 {
-        font-size: 30px;
-    }
-
-    .reward {
-        min-height: 118px;
-    }
-
-}
-
 </style>
+<div class="eyebrow">a small note · made with care</div>
+""", unsafe_allow_html=True)
 
-</head>
-
-<body>
-
-
-<!-- ================================================= -->
-<!-- STEP 1 — SECRET -->
-<!-- ================================================= -->
-
-<div class="card" id="unlock">
-
-    <div class="icon">
-        🎁
-    </div>
-
-    <h1>
-        You found it.
-    </h1>
-
-    <p class="subtitle">
-
-        There's a tiny surprise waiting
-        for the person who opened this.
-
-        <br><br>
-
-        But first... one little question 👀
-
-    </p>
-
-
-    <input
-        id="password"
-        type="text"
-        inputmode="text"
-        autocomplete="off"
-        autocapitalize="words"
-        placeholder="Enter password"
-    >
-
-
-    <button onclick="checkPassword()">
-        Open surprise ✨
-    </button>
-
-
-    <div
-        id="error"
-        class="error">
-    </div>
-
-
-    <!-- BIG CLEAR HINT -->
-
-    <div
-        id="hint"
-        class="hint">
-
-        <div class="hint-label">
-            💡 ONE LAST HINT
+if not st.session_state.unlocked:
+    with st.container(border=True):
+        st.markdown("""
+        <div class="hero">
+            <div class="seal">♡</div>
+            <h1>Hey, Mitali.</h1>
+            <p class="hero-copy">
+            There's something I wanted to say properly,
+            without making it a long text.
+            This little page is just for you.
+            </p>
         </div>
+        """, unsafe_allow_html=True)
 
-        <div class="hint-main">
-            ENTER YOUR NAME
+        with st.form("password_form"):
+            entered_password = st.text_input(
+                "A tiny password to open it",
+                placeholder="Enter password",
+                type="password",
+            )
+            submitted = st.form_submit_button(
+                "Open note", use_container_width=True
+            )
+
+        if submitted:
+            if entered_password.strip().casefold() == "mitali":
+                st.session_state.unlocked = True
+                st.session_state.show_hint = False
+                st.rerun()
+            else:
+                st.session_state.show_hint = True
+
+        if st.session_state.show_hint:
+            st.markdown(
+                '<div class="hint">Not quite — '
+                'try entering your name 😉</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                '<p class="tiny">A little personal, '
+                'nothing complicated.</p>',
+                unsafe_allow_html=True,
+            )
+
+else:
+    with st.container(border=True):
+        st.markdown("""
+        <div class="note-pill">JUST BEING HONEST</div>
+        <h1 class="note-title">
+            One thing I wanted you to know.
+        </h1>
+        <div class="letter">
+            <p>Hey Mitali,</p>
+            <p>First, <strong>I'm genuinely sorry</strong>
+            for the ways I may have hurt you or made you feel
+            misunderstood. I can't change what happened, and
+            I'm not expecting a sorry to fix everything.
+            I just wanted to say it honestly.</p>
+            <p>Tujhyasobat ghalavlela every single moment
+            majhyasathi special hota. Tujha smile, tu bolnyachi
+            style, ani agdi simple moments pan memorable
+            karaychi tuzhi way — these are things I still
+            remember. You have a warmth and a presence that
+            made ordinary days feel different, and I'm
+            genuinely glad I got to know you.</p>
+            <p>I don't want to put pressure on you or make
+            things awkward. I just didn't want to leave
+            these words unsaid. You mattered to me, and
+            the good memories still mean something to me.</p>
         </div>
-
-        <div class="hint-sub">
-            Yep... literally your name 😭
+        <div class="divider">one simple question</div>
+        <div class="question">
+            <p class="question-title">
+                Would you be open to coffee sometime? ☕
+            </p>
+            <p class="question-sub">
+                Just a calm conversation, no pressure
+                and no expectations.
+            </p>
         </div>
-
-    </div>
-
-
-    <div class="small">
-        No complicated password. Promise.
-    </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- STEP 2 — GIFT -->
-<!-- ================================================= -->
-
-<div
-    class="card page"
-    id="gift">
-
-    <div class="icon">
-        🎀
-    </div>
-
-    <h1>
-        A little something
-        for
-        <span
-            id="name"
-            class="gradient">
-        </span>
-    </h1>
-
-
-    <p class="subtitle">
-
-        You unlocked your gift.
-
-        <br><br>
-
-        Now you get to choose
-        what I owe you. 😌
-
-    </p>
-
-
-    <div class="rewards">
-
-
-        <div
-            class="reward"
-            onclick="
-                chooseReward(
-                    this,
-                    'Coffee date ☕'
-                )
-            ">
-
-            <div class="reward-icon">
-                ☕
-            </div>
-
-            <div class="reward-title">
-                Coffee date
-            </div>
-
-            <div class="reward-desc">
-                Coffee + good conversation.
-            </div>
-
-        </div>
-
-
-        <div
-            class="reward"
-            onclick="
-                chooseReward(
-                    this,
-                    'Food date 🍝'
-                )
-            ">
-
-            <div class="reward-icon">
-                🍝
-            </div>
-
-            <div class="reward-title">
-                Food date
-            </div>
-
-            <div class="reward-desc">
-                You choose what we eat.
-            </div>
-
-        </div>
-
-
-        <div
-            class="reward"
-            onclick="
-                chooseReward(
-                    this,
-                    'Dessert date 🍰'
-                )
-            ">
-
-            <div class="reward-icon">
-                🍰
-            </div>
-
-            <div class="reward-title">
-                Dessert date
-            </div>
-
-            <div class="reward-desc">
-                Something sweet. Obviously.
-            </div>
-
-        </div>
-
-
-        <div
-            class="reward"
-            onclick="
-                chooseReward(
-                    this,
-                    'Surprise date ✨'
-                )
-            ">
-
-            <div class="reward-icon">
-                ✨
-            </div>
-
-            <div class="reward-title">
-                Surprise me
-            </div>
-
-            <div class="reward-desc">
-                I'll plan it. No spoilers.
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <button onclick="claimGift()">
-        Claim my gift 💌
-    </button>
-
-
-    <div
-        id="giftResult"
-        class="result">
-    </div>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- STEP 3 — DATE -->
-<!-- ================================================= -->
-
-<div
-    class="card page"
-    id="final">
-
-    <div class="icon">
-        💌
-    </div>
-
-
-    <h1>
-
-        Okay,
-        <span
-            id="finalName"
-            class="gradient">
-        </span>...
-
-    </h1>
-
-
-    <p class="subtitle">
-
-        Your
-        <span id="finalReward">
-        </span>
-        is officially claimed.
-
-        <br><br>
-
-        Now there's just one tiny thing
-        left to decide...
-
-    </p>
-
-
-    <div
-        style="
-        font-size:23px;
-        line-height:1.3;
-        font-weight:800;
-        margin:25px 0;
-        ">
-
-        Should we actually
-        make this happen? 👀
-
-    </div>
-
-
-    <button onclick="yesDate()">
-        Let's do it ❤️
-    </button>
-
-
-    <div
-        id="finalResult"
-        class="result">
-    </div>
-
-
-    <div class="small">
-        No pressure. Just a cute excuse to meet. ✨
-    </div>
-
-</div>
-
-
-<script>
-
-
-/* ================================================= */
-/* STATE */
-/* ================================================= */
-
-let attempts = 0;
-
-let personName = "";
-
-let selectedReward = "";
-
-
-/* ================================================= */
-/* NAME VALIDATION */
-/* ================================================= */
-
-/*
-   Accept:
-
-   Sarah
-   Priya
-   Mary Jane
-   Anne-Marie
-   O'Connor
-
-   Reject:
-
-   12345
-   abc123
-   !!!
-   123
-*/
-
-function validName(name) {
-
-    const cleaned =
-        name.trim();
-
-
-    if (cleaned.length < 2) {
-        return false;
-    }
-
-
-    /*
-       At least TWO letters.
-    */
-
-    const letters =
-        cleaned.match(/[A-Za-z]/g);
-
-
-    if (!letters || letters.length < 2) {
-        return false;
-    }
-
-
-    /*
-       Only normal name characters.
-    */
-
-    const validCharacters =
-        /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
-
-
-    if (
-        !validCharacters.test(cleaned)
-    ) {
-        return false;
-    }
-
-
-    return true;
-
-}
-
-
-/* ================================================= */
-/* UNLOCK */
-/* ================================================= */
-
-function checkPassword() {
-
-    const input =
-        document
-        .getElementById("password")
-        .value
-        .trim();
-
-
-    const error =
-        document
-        .getElementById("error");
-
-
-    const hint =
-        document
-        .getElementById("hint");
-
-
-    error.style.display = "none";
-
-
-    if (!input) {
-
-        error.style.display = "block";
-
-        error.innerHTML =
-            "❌ Enter something first 😭";
-
-        return;
-
-    }
-
-
-    /*
-       FIRST ATTEMPT:
-
-       ALWAYS WRONG.
-
-       This gives the intended
-       password → hint experience.
-    */
-
-    if (attempts === 0) {
-
-        attempts++;
-
-        error.style.display =
-            "block";
-
-        error.innerHTML =
-            "❌ Nope... that's not it 😭";
-
-        hint.style.display =
-            "block";
-
-        return;
-
-    }
-
-
-    /*
-       SECOND+ ATTEMPTS:
-
-       NOW ACTUALLY VALIDATE
-       THAT IT LOOKS LIKE A NAME.
-    */
-
-    if (!validName(input)) {
-
-        error.style.display =
-            "block";
-
-        error.innerHTML =
-            "❌ That's not a name 😭<br>" +
-            "Use your actual first name.";
-
-        hint.style.display =
-            "block";
-
-        document
-            .getElementById("password")
-            .select();
-
-        return;
-
-    }
-
-
-    /*
-       VALID NAME
-    */
-
-    personName = input;
-
-
-    document
-        .getElementById("unlock")
-        .style.display = "none";
-
-
-    document
-        .getElementById("gift")
-        .style.display = "block";
-
-
-    document
-        .getElementById("name")
-        .textContent = personName;
-
-}
-
-
-/* ================================================= */
-/* REWARD */
-/* ================================================= */
-
-function chooseReward(
-    element,
-    reward
-) {
-
-    document
-        .querySelectorAll(".reward")
-        .forEach(
-            function(item) {
-
-                item.classList
-                    .remove("selected");
-
-            }
-        );
-
-
-    element.classList
-        .add("selected");
-
-
-    selectedReward =
-        reward;
-
-}
-
-
-/* ================================================= */
-/* CLAIM */
-/* ================================================= */
-
-function claimGift() {
-
-    const result =
-        document
-        .getElementById("giftResult");
-
-
-    if (!selectedReward) {
-
-        result.style.display =
-            "block";
-
-        result.innerHTML =
-            "Pick your gift first 😌";
-
-        return;
-
-    }
-
-
-    result.style.display =
-        "block";
-
-
-    result.innerHTML = `
-
-        🎁
-
-        <br>
-
-        <b>
-            ${selectedReward}
-        </b>
-
-        <br><br>
-
-        Good choice,
-        ${escapeHTML(personName)} 😌
-
-        <br><br>
-
-        <button
-            onclick="openFinal()"
-            style="
-                margin-top:4px;
-            ">
-
-            Okay, what's next? 👀
-
-        </button>
-
-    `;
-
-}
-
-
-/* ================================================= */
-/* FINAL */
-/* ================================================= */
-
-function openFinal() {
-
-    document
-        .getElementById("gift")
-        .style.display = "none";
-
-
-    document
-        .getElementById("final")
-        .style.display = "block";
-
-
-    document
-        .getElementById("finalName")
-        .textContent =
-            personName;
-
-
-    document
-        .getElementById("finalReward")
-        .textContent =
-            selectedReward;
-
-}
-
-
-/* ================================================= */
-/* YES */
-/* ================================================= */
-
-function yesDate() {
-
-    createHearts();
-
-
-    const result =
-        document
-        .getElementById("finalResult");
-
-
-    result.style.display =
-        "block";
-
-
-    result.innerHTML = `
-
-        <div style="
-            font-size:38px;
-            margin-bottom:8px;
-        ">
-            🥹❤️
-        </div>
-
-        <b>
-            It's a date.
-        </b>
-
-        <br><br>
-
-        ${selectedReward}
-
-        <br><br>
-
-        I'll see you soon,
-        ${escapeHTML(personName)}. ✨
-
-    `;
-
-}
-
-
-/* ================================================= */
-/* HEARTS */
-/* ================================================= */
-
-function createHearts() {
-
-    const emojis =
-        [
-            "❤️",
-            "💗",
-            "💕",
-            "💖",
-            "💘"
-        ];
-
-
-    for (
-        let i = 0;
-        i < 25;
-        i++
-    ) {
-
-        const heart =
-            document
-            .createElement("div");
-
-
-        heart.className =
-            "heart";
-
-
-        heart.innerHTML =
-            emojis[
-                Math.floor(
-                    Math.random() *
-                    emojis.length
-                )
-            ];
-
-
-        heart.style.left =
-            Math.random() *
-            100 +
-            "vw";
-
-
-        heart.style.animationDelay =
-            Math.random() *
-            .8 +
-            "s";
-
-
-        document
-            .body
-            .appendChild(heart);
-
-
-        setTimeout(
-            function() {
-                heart.remove();
-            },
-            3500
-        );
-
-    }
-
-}
-
-
-/* ================================================= */
-/* BASIC HTML ESCAPING */
-/* ================================================= */
-
-function escapeHTML(text) {
-
-    const div =
-        document
-        .createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-
-}
-
-
-/* ================================================= */
-/* ENTER KEY */
-/* ================================================= */
-
-document
-    .getElementById("password")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                checkPassword();
-
-            }
-
-        }
-    );
-
-</script>
-
-</body>
-</html>
-""", height=900, scrolling=False)
+        """, unsafe_allow_html=True)
+
+        st.write("")
+        yes_col, no_col = st.columns(2)
+
+        with yes_col:
+            if st.button(
+                "Yes, coffee sounds okay",
+                key="yes_coffee",
+                use_container_width=True,
+            ):
+                st.session_state.coffee_response = "yes"
+
+        with no_col:
+            if st.button(
+                "No, thank you",
+                key="no_coffee",
+                use_container_width=True,
+            ):
+                st.session_state.coffee_response = "no"
+
+        if st.session_state.coffee_response == "yes":
+            st.success(
+                "That would be nice. ☕ Text me whenever "
+                "you're comfortable, and you can choose "
+                "the time and place. We can keep it simple."
+            )
+        elif st.session_state.coffee_response == "no":
+            st.info(
+                "That's completely okay. Thank you for "
+                "reading this. I respect your answer "
+                "and won't push."
+            )
+
+st.markdown(
+    '<p class="footer">Made with care. Your answer is yours '
+    'to choose, and either answer will be respected.</p>',
+    unsafe_allow_html=True,
+)
